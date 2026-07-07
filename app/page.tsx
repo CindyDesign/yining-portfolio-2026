@@ -13,7 +13,6 @@ export default function HomePage() {
             <ProjectCard
               key={project.slug}
               project={project}
-              reverse={i % 2 === 1}
               priority={i === 0}
             />
           ))}
