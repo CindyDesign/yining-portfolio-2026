@@ -10,15 +10,6 @@ body {
   @apply antialiased;
 }
 
-/* Ambient dark-theme background, used by pages that keep the original dark look */
-.dark-ambient {
-  color-scheme: dark;
-  background-image:
-    radial-gradient(60rem 40rem at 8% 22%, rgba(109, 94, 252, 0.18), transparent 60%),
-    radial-gradient(50rem 40rem at 96% 8%, rgba(180, 107, 216, 0.14), transparent 55%);
-  background-attachment: fixed;
-}
-
 /* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * {
