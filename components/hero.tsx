@@ -4,11 +4,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const segments = [
-  { text: "Hello, I am Cindy, a thoughtful UX Designer who create ", accent: false },
+  { text: "Hi, I’m Cindy. A Senior Product Designer & AI Builder crafting ", accent: false },
   { text: "intuitive", accent: true },
-  { text: " and ", accent: false },
-  { text: "visually pleasing", accent: true },
-  { text: " web and mobile experiences.", accent: false },
+  { text: ", ", accent: false },
+  { text: "visually striking", accent: true },
+  { text: " Fintech experiences.", accent: false },
 ] as const;
 
 const fullText = segments.map((s) => s.text).join("");
@@ -51,9 +51,13 @@ export function Hero() {
 
   return (
     <section className="mx-auto max-w-shell px-6 pb-24 pt-16 sm:pt-24">
-      <h1 className="max-w-4xl text-4xl font-light leading-[1.15] tracking-tight text-ink sm:text-6xl lg:text-[66px] lg:leading-[1.08] lg:tracking-[-1.32px]">
-        <span className="sr-only">{fullText}</span>
-        <span aria-hidden="true">
+      <h1 className="relative max-w-4xl text-4xl font-light leading-[1.15] tracking-tight text-ink sm:text-6xl lg:text-[66px] lg:leading-[1.08] lg:tracking-[-1.32px]">
+        {/* Reserves the final text's height so typing doesn't shift the layout */}
+        <span className="invisible" aria-hidden="true">
+          {fullText}
+        </span>
+
+        <span className="absolute inset-0" aria-hidden="true">
           {rendered}
           <span
             className={`ml-1 inline-block h-[0.85em] w-[2px] translate-y-[0.1em] bg-ink align-middle ${
@@ -61,6 +65,8 @@ export function Hero() {
             }`}
           />
         </span>
+
+        <span className="sr-only">{fullText}</span>
       </h1>
 
       <Link
