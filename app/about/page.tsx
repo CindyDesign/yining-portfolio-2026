@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "About Ningning — UX designer at PNC Bank.",
+  description: "About Cindy — UX designer at PNC Bank.",
 };
 
 export default function AboutPage() {

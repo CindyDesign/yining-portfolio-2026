@@ -44,7 +44,7 @@ export function SiteFooter() {
           </ul>
         </div>
 
-        <p className="text-[13px] text-ink-muted">© 2026 Ningning — UX Designer</p>
+        <p className="text-[13px] text-ink-muted">© 2026 Cindy — UX Designer</p>
       </div>
     </footer>
   );

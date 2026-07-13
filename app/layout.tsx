@@ -13,13 +13,13 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://yining.design"),
   title: {
-    default: "Ningning — UX Designer",
-    template: "%s · Ningning",
+    default: "Cindy — UX Designer",
+    template: "%s · Cindy",
   },
   description:
-    "Ningning is a thoughtful UX designer creating intuitive and visually pleasing web and mobile experiences.",
+    "Cindy is a thoughtful UX designer creating intuitive and visually pleasing web and mobile experiences.",
   openGraph: {
-    title: "Ningning — UX Designer",
+    title: "Cindy — UX Designer",
     description:
       "Creating intuitive and visually pleasing web and mobile experiences.",
     type: "website",

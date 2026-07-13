@@ -13,7 +13,7 @@ export function SiteNav() {
           href="/"
           className="text-lg font-semibold tracking-tight text-ink transition-opacity hover:opacity-70"
         >
-          Ningning
+          Cindy
         </Link>
         <ul className="flex items-center gap-10 text-[13px] font-medium uppercase tracking-[0.06em] text-ink">
           {links.map((link) => (

@@ -4,7 +4,7 @@ export function Hero() {
   return (
     <section className="mx-auto max-w-shell px-6 pb-24 pt-16 sm:pt-24">
       <h1 className="max-w-4xl text-4xl font-light leading-[1.15] tracking-tight text-ink sm:text-6xl lg:text-[66px] lg:leading-[1.08] lg:tracking-[-1.32px]">
-        Hello, I am Ningning, a thoughtful UX Designer who create{" "}
+        Hello, I am Cindy, a thoughtful UX Designer who create{" "}
         <span className="text-accent">intuitive</span> and{" "}
         <span className="text-accent">visually pleasing</span> web and mobile
         experiences.
