@@ -23,7 +23,7 @@ export default async function ProjectPage({ params }: Params) {
   if (!project) notFound();
 
   return (
-    <article className="mx-auto max-w-3xl px-6 py-10">
+    <article className="mx-auto max-w-shell px-6 py-10">
       <Link
         href="/#work"
         className="inline-flex items-center gap-2 text-sm text-ink-muted transition-colors hover:text-ink"
@@ -72,7 +72,7 @@ export default async function ProjectPage({ params }: Params) {
             alt={project.hero.alt}
             fill
             priority
-            sizes="(max-width: 768px) 100vw, 768px"
+            sizes="(max-width: 1200px) 100vw, 1200px"
             className="object-cover"
           />
         </div>
@@ -97,7 +97,7 @@ export default async function ProjectPage({ params }: Params) {
                   src={section.image.src}
                   alt={section.image.alt}
                   fill
-                  sizes="(max-width: 768px) 100vw, 768px"
+                  sizes="(max-width: 1200px) 100vw, 1200px"
                   className="object-cover"
                 />
               </div>
