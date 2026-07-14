@@ -4,52 +4,41 @@ import type { Project } from "@/lib/projects";
 
 type ProjectCardProps = {
   project: Project;
-  /** Flip image to the left on alternating rows for visual rhythm */
-  reverse?: boolean;
   priority?: boolean;
 };
 
 /**
- * Featured-work card with hover scaling on the preview image.
+ * Featured-work row: accent label, headline, summary, and pill button on the
+ * left; preview image on the right. Rows are separated by a hairline rule.
  */
-export function ProjectCard({ project, reverse, priority }: ProjectCardProps) {
+export function ProjectCard({ project, priority }: ProjectCardProps) {
   return (
-    <Link
-      href={project.href}
-      target={project.external ? "_blank" : undefined}
-      rel={project.external ? "noopener noreferrer" : undefined}
-      aria-label={`View project: ${project.title}`}
-      className="group block rounded-3xl border border-white/5 bg-ink-card/60
-                 p-6 transition-all duration-500 ease-soft will-change-transform
-                 hover:-translate-y-1 hover:border-white/15
-                 hover:shadow-2xl hover:shadow-glow-violet/10
-                 focus-visible:outline-none focus-visible:ring-2
-                 focus-visible:ring-glow-plum sm:p-8"
-    >
-      <div
-        className={`grid items-center gap-8 md:grid-cols-2 ${
-          reverse ? "md:[&>*:first-child]:order-2" : ""
-        }`}
+    <div className="w-full">
+      <div className="h-px w-full bg-line" />
+      <Link
+        href={project.href}
+        target={project.external ? "_blank" : undefined}
+        rel={project.external ? "noopener noreferrer" : undefined}
+        aria-label={`View project: ${project.title}`}
+        className="group flex flex-col gap-8 py-9 md:flex-row md:items-start md:gap-16"
       >
-        {/* Text column */}
-        <div className="flex flex-col">
-          <span className="text-sm font-medium text-haze-muted">
-            {project.period}
+        <div className="flex flex-1 flex-col gap-5 md:pt-1">
+          <span className="text-[13px] font-medium uppercase tracking-[0.06em] text-accent">
+            {project.index} — {project.period}
           </span>
 
-          <h3 className="mt-3 text-xl font-semibold leading-snug text-white sm:text-2xl">
-            <span className="text-haze-muted">{project.index} / </span>
+          <h3 className="text-2xl font-light leading-[1.18] tracking-tight text-ink sm:text-[32px]">
             {project.title}
           </h3>
 
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-haze sm:text-base">
+          <p className="max-w-[460px] text-base leading-relaxed text-ink-muted">
             {project.summary}
           </p>
 
           <span
-            className="mt-8 inline-flex items-center gap-2 self-start rounded-full
-                       border border-white/15 px-5 py-2.5 text-sm font-medium text-white
-                       transition-colors duration-300 ease-soft group-hover:border-white/40"
+            className="mt-3 inline-flex items-center gap-2 self-start rounded-full
+                       border border-ink px-[22px] py-[13px] text-sm font-medium text-ink
+                       transition-colors duration-300 ease-soft group-hover:bg-ink/5"
           >
             View Project
             <svg
@@ -71,19 +60,17 @@ export function ProjectCard({ project, reverse, priority }: ProjectCardProps) {
           </span>
         </div>
 
-        {/* Preview column — image scales within a clipped frame */}
-        <div className="relative aspect-[16/11] overflow-hidden rounded-2xl bg-ink-700">
+        <div className="relative aspect-[8/5] w-full shrink-0 overflow-hidden rounded md:w-[600px]">
           <Image
             src={project.image}
             alt={project.imageAlt}
             fill
             priority={priority}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover transition-transform duration-700 ease-soft
-                       group-hover:scale-[1.06]"
+            sizes="(max-width: 768px) 100vw, 600px"
+            className="object-cover transition-transform duration-700 ease-soft group-hover:scale-[1.03]"
           />
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }

@@ -11,17 +11,14 @@ export function SiteNav() {
       <nav className="mx-auto flex max-w-shell items-center justify-between px-6 py-8">
         <Link
           href="/"
-          className="text-lg font-bold text-white transition-opacity hover:opacity-80"
+          className="text-lg font-semibold tracking-tight text-ink transition-opacity hover:opacity-70"
         >
-          Ningning
+          Cindy
         </Link>
-        <ul className="flex items-center gap-8">
+        <ul className="flex items-center gap-10 text-[13px] font-medium uppercase tracking-[0.06em] text-ink">
           {links.map((link) => (
             <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-sm font-medium text-white/90 transition-colors hover:text-white"
-              >
+              <Link href={link.href} className="transition-opacity hover:opacity-60">
                 {link.label}
               </Link>
             </li>

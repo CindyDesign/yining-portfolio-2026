@@ -43,7 +43,7 @@ export const projects: Project[] = [
     period: "Q4 2023 – Q1 2024",
     summary:
       "Helping customers efficiently transfer between PNC accounts and external accounts, with a clearer flow and verification.",
-    image: "/projects/external-transfer.jpg",
+    image: "/projects/ExternalTransfer%20MobileThumbnail.jpg",
     imageAlt: "External Transfer mobile redesign",
     href: "/work/external-transfer-mobile-redesign",
     meta: {
@@ -80,7 +80,7 @@ export const projects: Project[] = [
     period: "2024",
     summary:
       "A labor-saving tool that lets doctors upload and edit surgical videos — designed 0-to-1 with a small cross-functional team in a one-month sprint.",
-    image: "/projects/genesis-medtech.jpg",
+    image: "/projects/GenesisThumania.jpg",
     imageAlt: "Genesis MedTech surgical video editor",
     href: "/work/genesis-medtech-video-platform",
     meta: {
@@ -144,7 +144,7 @@ export const projects: Project[] = [
     period: "2024",
     summary:
       "Reworking PNC's in-app Help Center — used by 10M monthly visitors — so users can find branches and request callbacks without friction.",
-    image: "/projects/help-center.jpg",
+    image: "/projects/Help%20Center%20Mobile%20ExperienceThumbnail.jpg",
     imageAlt: "PNC Help Center mobile screens",
     href: "/work/help-center-mobile-redesign",
     meta: {

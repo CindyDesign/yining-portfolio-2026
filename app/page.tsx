@@ -8,7 +8,10 @@ export default function HomePage() {
       <Hero />
 
       <section id="work" className="mx-auto max-w-shell px-6 pb-24">
-        <div className="flex flex-col gap-8">
+        <p className="mb-8 text-[13px] font-medium uppercase tracking-[0.06em] text-ink-muted">
+          Selected Work
+        </p>
+        <div className="flex flex-col">
           {projects.map((project, i) => (
             <ProjectCard
               key={project.slug}

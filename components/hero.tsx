@@ -1,39 +1,80 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+const segments = [
+  { text: "Hi, I’m Cindy. A Senior Product Designer & AI Builder crafting ", accent: false },
+  { text: "intuitive", accent: true },
+  { text: ", ", accent: false },
+  { text: "visually striking", accent: true },
+  { text: " Fintech experiences.", accent: false },
+] as const;
+
+const fullText = segments.map((s) => s.text).join("");
 
 export function Hero() {
+  const [charCount, setCharCount] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setCharCount(fullText.length);
+      return;
+    }
+
+    let count = 0;
+    const interval = setInterval(() => {
+      count += 1;
+      setCharCount(count);
+      if (count >= fullText.length) clearInterval(interval);
+    }, 28);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const isDone = charCount >= fullText.length;
+
+  let consumed = 0;
+  const rendered = segments.map((segment, i) => {
+    const start = consumed;
+    consumed += segment.text.length;
+    const visible = segment.text.slice(0, Math.max(0, charCount - start));
+    if (!visible) return null;
+    return segment.accent ? (
+      <span key={i} className="text-accent">
+        {visible}
+      </span>
+    ) : (
+      <span key={i}>{visible}</span>
+    );
+  });
+
   return (
-    <section className="relative mx-auto max-w-shell px-6 pb-24 pt-10">
-      {/* Ambient glow behind the headline */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[420px]
-                   bg-[radial-gradient(40rem_22rem_at_60%_30%,rgba(180,107,216,0.25),transparent_60%),radial-gradient(30rem_20rem_at_10%_20%,rgba(109,94,252,0.3),transparent_60%)]"
-      />
+    <section className="mx-auto max-w-shell px-6 pb-24 pt-16 sm:pt-24">
+      <h1 className="relative max-w-4xl text-4xl font-light leading-[1.15] tracking-tight text-ink sm:text-6xl lg:text-[66px] lg:leading-[1.08] lg:tracking-[-1.32px]">
+        {/* Reserves the final text's height so typing doesn't shift the layout */}
+        <span className="invisible" aria-hidden="true">
+          {fullText}
+        </span>
 
-      {/* Mark */}
-      <div className="mb-10 flex h-14 w-14 items-center justify-center rounded-full bg-glow-violet text-2xl font-bold text-white shadow-lg shadow-glow-violet/30">
-        N
-      </div>
+        <span className="absolute inset-0" aria-hidden="true">
+          {rendered}
+          <span
+            className={`ml-1 inline-block h-[0.85em] w-[2px] translate-y-[0.1em] bg-ink align-middle ${
+              isDone ? "animate-[blink_1s_steps(1)_infinite]" : ""
+            }`}
+          />
+        </span>
 
-      <p className="mb-4 text-2xl font-light text-haze sm:text-3xl">
-        Hello, I am Ningning, a thoughtful UX Designer who
-      </p>
-
-      <h1 className="max-w-4xl text-4xl font-semibold leading-tight tracking-tight text-white sm:text-6xl">
-        create{" "}
-        <span className="bg-gradient-to-r from-glow-violet to-glow-plum bg-clip-text text-transparent">
-          intuitive
-        </span>{" "}
-        and <span className="text-white">visually pleasing</span> web and mobile
-        experiences.
+        <span className="sr-only">{fullText}</span>
       </h1>
 
       <Link
         href="#work"
         aria-label="Scroll to featured work"
         className="mt-12 inline-flex h-11 w-11 items-center justify-center rounded-full
-                   text-white/70 transition-all duration-300 ease-soft
-                   hover:translate-y-1 hover:text-white"
+                   text-ink/60 transition-all duration-300 ease-soft
+                   hover:translate-y-1 hover:text-ink"
       >
         <svg width="20" height="24" viewBox="0 0 20 24" fill="none" aria-hidden>
           <path
