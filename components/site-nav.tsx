@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const links = [
   { label: "About", href: "/about" },
-  { label: "Resume", href: "/resume.pdf" },
+  { label: "Resume", href: "/Cindy-Zhang-Resume.pdf" },
 ];
 
 export function SiteNav() {
