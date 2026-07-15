@@ -1,7 +1,17 @@
+export type CaseStudySubsection = {
+  title: string;
+  body?: string;
+  bullets?: string[];
+};
+
 export type CaseStudySection = {
   heading: string;
   /** One or more paragraphs of body copy */
   body: string[];
+  /** Optional flat bullet list shown after the paragraphs */
+  bullets?: string[];
+  /** Optional sub-headings (each with its own body and/or bullets) */
+  subsections?: CaseStudySubsection[];
   /** Optional image shown after the paragraphs */
   image?: { src: string; alt: string; caption?: string };
 };
@@ -19,7 +29,7 @@ export type Project = {
   href: string;
   external?: boolean;
   /** Meta shown at the top of the case study */
-  meta?: { role: string; team: string; timeline: string };
+  meta?: { role: string; team: string; timeline: string; company?: string };
   /** Optional hero image for the case study page */
   hero?: { src: string; alt: string };
   caseStudy?: CaseStudySection[];
@@ -39,36 +49,121 @@ export const projects: Project[] = [
   {
     index: "01",
     slug: "external-transfer-mobile-redesign",
-    title: "External Transfer Mobile Redesign",
-    period: "Q4 2023 – Q1 2024",
+    title: "Mobile External Transfer Redesign — PNC Bank",
+    period: "July 2025 - August 2025",
     summary:
-      "Helping customers efficiently transfer between PNC accounts and external accounts, with a clearer flow and verification.",
+      "Redesigned PNC's external transfer flow, cutting a multi-day verification wait to minutes and lifting connected-account rate 35% for 544K+ users.",
     image: "/projects/ExternalTransfer%20MobileThumbnail.jpg",
     imageAlt: "External Transfer mobile redesign",
     href: "/work/external-transfer-mobile-redesign",
     meta: {
-      role: "UX/UI Design",
-      team: "PNC Mobile",
-      timeline: "Q4 2023 – Q1 2024",
+      role: "Senior Product Designer",
+      timeline: "July 2025 - August 2025",
+      company: "PNC Bank",
+      team: "Cross-functional pod (Product, Engineering, Design)",
     },
     caseStudy: [
       {
-        heading: "Overview",
+        heading: "Context",
         body: [
-          "PNC customers regularly move money between their own PNC accounts and accounts held at other banks. The existing external-transfer flow made this harder than it needed to be — unclear account selection, ambiguous verification, and no confidence that a transfer would arrive on time.",
-          "The redesign focused on a clearer step-by-step flow: choosing accounts, entering an amount and frequency, and verifying with a one-time passcode before confirming.",
+          "PNC is a top-ten bank in the US, with 10 million people using its native mobile app monthly. I am the lead designer for the external transfer feature, which helps users move money from their PNC accounts to other bank accounts.",
         ],
       },
       {
-        heading: "The problem",
+        heading: "Importance",
         body: [
-          "Customers weren't sure which accounts they could transfer between, how long a transfer would take, or whether it had gone through. That uncertainty pushed people toward slower channels like calling support or visiting a branch.",
+          "Overhauled the entire mobile external transfer experience to combat a 45% enrollment abandonment rate that was costing the bank millions. Streamlined the onboarding process and established structural consistency across all payment and transfer flows.",
         ],
       },
       {
-        heading: "What I designed",
+        heading: "The Problem",
         body: [
-          "A guided transfer flow with clear account pickers, an explicit amount and frequency step, and a one-time passcode verification screen that reassures customers their money is protected before the final confirmation.",
+          "External transfer enrollment was bleeding users before they ever initiated a transaction, resulting in a 35% abandonment rate partway through the process alongside inconsistent interaction patterns during the make-a-transfer process.",
+        ],
+        subsections: [
+          {
+            title: "Multi-day verification wait times",
+            body: "Trial deposits required 1–2 business days before a user could even confirm their external account, killing momentum at the exact moment intent was highest.",
+          },
+          {
+            title: "Redundant steps within enrollment",
+            body: "Enrollment forced users through separate deposit-verification and identity-verification steps that could be collapsed without compromising security.",
+          },
+          {
+            title: "Inconsistent interaction pattern",
+            body: "Inconsistent interaction patterns across the external transfer experience reduced predictability, ultimately undermining the systemic trust that is absolutely critical to a high-fidelity financial transaction flow.",
+          },
+        ],
+      },
+      {
+        heading: "The Solution",
+        body: [],
+        bullets: [
+          "Successfully aligned product, engineering, and risk partners to abandon legacy trial deposits, transitioning the platform toward real-time account verification to boost activation velocity and user trust.",
+          "Collapsed redundant verification steps by combining trial-deposit confirmation with additional identity verification into a single pass.",
+          "Established one consistent transfer flow from entry point to success screen so the experience felt identical whether a user started from account overview, transfers, or settings.",
+        ],
+      },
+      {
+        heading: "Outcomes & Impact (The Proof)",
+        body: [],
+        bullets: ["Status: Shipped to production; live in PNC's mobile app."],
+        subsections: [
+          {
+            title: "Hard Metrics",
+            bullets: [
+              "544K external transfer users on the redesigned flow",
+              "108K enrollments processed post-launch",
+              "435.2K connected accounts",
+              "100K+ users moved through the new real-time verification",
+              "+25% improvement in enrollment completion",
+              "-49 seconds average reduction in sign-up flow time",
+              "35% increase in connected-account rate",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Deep Dive: Process, Iterations, and Trade-offs",
+        body: [],
+        subsections: [
+          {
+            title: "Upgrading from trial deposits to real-time verification",
+            body: "While trial deposits were historically favored as a secure ownership proof, we leveraged customer advocacy insights to align partners around a modern paradigm: micro-deposits are now less secure than real-time one-time passcodes and add unnecessary friction without protecting the user.",
+          },
+          {
+            title: "Cut enrollment process from 16 steps into 10 steps",
+            body: "Redesigned and consolidated a legacy 16-step pre-enrollment and post-enrollment flow into a highly optimized 10-step experience, while mapping out a future-state architecture to reduce the entire funnel to 6 friction-free steps.",
+          },
+          {
+            title:
+              "Establish global pattern consistency to enable seamless, intuitive interactions",
+            bullets: [
+              "Standardized transfer entry points for a consistent look, added a prominent visual tile for clarity, and included subtext for user guidance.",
+              "Led a generative card-sorting workshop to restructure the six core transaction fields, converging on a single, high-predictability input order that mirrors user mental models.",
+              "Established a clear visual hierarchy across all pages, ensuring content, containers, and background colors create distinction between different levels of information.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Other Contribution",
+        body: [],
+        subsections: [
+          {
+            title: "AI-assisted design system building",
+            body: "I used AI to systematically stress-test our newly structured transaction fields — generating robust copy and data states for edge cases.",
+          },
+          {
+            title: "QA testing",
+            body: "Partnered with engineering to sequence backend verification changes alongside the UI rebuild, ensuring the compressed flow didn't outpace fraud/compliance checks.",
+          },
+        ],
+      },
+      {
+        heading: "Lesson Learned",
+        body: [
+          "What I've learned is that leadership is the driving force behind innovation and growth in the evolving field of product design. Learning through diverse experiences from users and key stakeholders has become a cornerstone of my journey, shaping my perspective and fostering continuous improvement.",
         ],
       },
     ],

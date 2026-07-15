@@ -49,18 +49,28 @@ export default async function ProjectPage({ params }: Params) {
       <p className="mt-6 text-lg leading-relaxed text-ink-muted">{project.summary}</p>
 
       {project.meta && (
-        <dl className="mt-10 grid gap-6 border-y border-line py-8 sm:grid-cols-3">
+        <dl
+          className={`mt-10 grid gap-6 border-y border-line py-8 ${
+            project.meta.company ? "grid-cols-2 sm:grid-cols-4" : "sm:grid-cols-3"
+          }`}
+        >
           <div>
             <dt className="text-xs uppercase tracking-wider text-ink-muted">Role</dt>
             <dd className="mt-1 text-sm text-ink">{project.meta.role}</dd>
           </div>
           <div>
-            <dt className="text-xs uppercase tracking-wider text-ink-muted">Team</dt>
-            <dd className="mt-1 text-sm text-ink">{project.meta.team}</dd>
-          </div>
-          <div>
             <dt className="text-xs uppercase tracking-wider text-ink-muted">Timeline</dt>
             <dd className="mt-1 text-sm text-ink">{project.meta.timeline}</dd>
+          </div>
+          {project.meta.company && (
+            <div>
+              <dt className="text-xs uppercase tracking-wider text-ink-muted">Company</dt>
+              <dd className="mt-1 text-sm text-ink">{project.meta.company}</dd>
+            </div>
+          )}
+          <div>
+            <dt className="text-xs uppercase tracking-wider text-ink-muted">Team</dt>
+            <dd className="mt-1 text-sm text-ink">{project.meta.team}</dd>
           </div>
         </dl>
       )}
@@ -90,6 +100,36 @@ export default async function ProjectPage({ params }: Params) {
               </p>
             ))}
           </div>
+          {section.bullets && (
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-ink-muted">
+              {section.bullets.map((bullet, i) => (
+                <li key={i} className="leading-relaxed">
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          )}
+          {section.subsections && (
+            <div className="mt-6 space-y-6">
+              {section.subsections.map((sub) => (
+                <div key={sub.title}>
+                  <h3 className="text-base font-semibold text-ink">{sub.title}</h3>
+                  {sub.body && (
+                    <p className="mt-2 leading-relaxed text-ink-muted">{sub.body}</p>
+                  )}
+                  {sub.bullets && (
+                    <ul className="mt-2 list-disc space-y-2 pl-5 text-ink-muted">
+                      {sub.bullets.map((bullet, i) => (
+                        <li key={i} className="leading-relaxed">
+                          {bullet}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
           {section.image && (
             <figure className="mt-8">
               <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-black/5">
