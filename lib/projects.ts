@@ -105,7 +105,7 @@ export const projects: Project[] = [
         ],
       },
       {
-        heading: "Outcomes & Impact (The Proof)",
+        heading: "Outcomes & Impact",
         body: [],
         bullets: ["Status: Shipped to production; live in PNC's mobile app."],
         subsections: [
