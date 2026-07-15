@@ -106,8 +106,7 @@ export const projects: Project[] = [
       },
       {
         heading: "Outcomes & Impact",
-        body: [],
-        bullets: ["Status: Shipped to production; live in PNC's mobile app."],
+        body: ["Status: Shipped to production; live in PNC's mobile app."],
         subsections: [
           {
             title: "Hard Metrics",
