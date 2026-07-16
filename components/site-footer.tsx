@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/" },
-  { label: "Behance", href: "https://www.behance.net/" },
-  { label: "Instagram", href: "https://www.instagram.com/" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/yiningzdesigning/" },
+  { label: "Behance", href: "https://www.behance.net/yningzhang13" },
+  { label: "Instagram", href: "https://www.instagram.com/cindy_lujewels/" },
 ];
 
 export function SiteFooter() {
