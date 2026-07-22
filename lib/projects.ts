@@ -170,17 +170,18 @@ export const projects: Project[] = [
   {
     index: "02",
     slug: "genesis-medtech-video-platform",
-    title: "Building a 0‑to‑1 Video Uploading and Editing Platform for Genesis MedTech",
-    period: "2024",
+    title: "Genesis MedTech — AI-Assisted Surgical Video Platform",
+    period: "Late 2023 – 2025",
     summary:
-      "A labor-saving tool that lets doctors upload and edit surgical videos — designed 0-to-1 with a small cross-functional team in a one-month sprint.",
+      "Designed an all-in-one platform that lets surgeons upload and edit operative videos with AI assistance — reaching 85% surgeon satisfaction on upload and a 68% editing retention rate at MVP (vs. 60% benchmark).",
     image: "/projects/GenesisThumania.jpg",
     imageAlt: "Genesis MedTech surgical video editor",
     href: "/work/genesis-medtech-video-platform",
     meta: {
-      role: "Lead UX Designer",
-      team: "1 PM · 4 front-end engineers · 1 UX researcher",
-      timeline: "1 month design timeline",
+      role: "Product Designer (led discovery research, IA, and interaction design)",
+      company: "Genesis MedTech",
+      team: "2 PMs · AI engineering · content design",
+      timeline: "Late 2023 – 2025",
     },
     hero: {
       src: "/projects/genesis-editor.jpg",
@@ -188,46 +189,88 @@ export const projects: Project[] = [
     },
     caseStudy: [
       {
-        heading: "Overview",
+        heading: "Context",
         body: [
-          "Our project set out to build a labor-saving tool for doctors that allows users to upload and edit surgical videos. Genesis MedTech needed a platform its surgeons could actually rely on — not a general-purpose video editor bent to fit a clinical workflow.",
-          "As the lead designer on a team of a PM, four front-end engineers, and a UX researcher, I owned the end-to-end experience across a one-month build.",
+          "Genesis MedTech is a global medical device company serving 400+ U.S. hospitals. I joined as the product designer on a team of 2 PMs, AI engineering, and content design, leading discovery research, information architecture, and interaction design.",
+        ],
+      },
+      {
+        heading: "The Problem",
+        body: [
+          "Leading surgeons publish operative videos on platforms like YouTube — to reflect on their own procedures and help younger doctors learn. But mainstream platforms fail them: surgical footage gets misclassified as graphic content and removed, and limited editing tools force surgeons into separate software to finish their videos.",
+          "Genesis's Q4 2023 market research surfaced a consistent signal: senior physicians across community and federal hospitals wanted to create teaching content and build a peer community. I co-led a 3-day (15-hour) alignment workshop with leadership and physician representatives to define the opportunity and product vision.",
+          "Our goal: a labor-saving, all-in-one tool to upload and edit surgical videos, with AI accelerating both.",
         ],
         image: {
           src: "/projects/genesis-team.jpg",
           alt: "The Genesis MedTech project team collaborating",
-          caption: "A one-month sprint with a tight, cross-functional team.",
+          caption:
+            "A 3-day alignment workshop with leadership and physician representatives.",
         },
       },
       {
-        heading: "Understanding the users",
+        heading: "Key Solution",
         body: [
-          "Surgeons upload patient information manually and want to transfer existing information from hospital systems rather than re-enter it. They also want a fair review process so their videos aren't unfairly flagged as graphic content, and tools to redact sensitive patient information before sharing.",
-          "These insights pointed to three needs: save surgeons time, protect patient privacy, and give them confidence their work won't be blocked without recourse.",
-        ],
-      },
-      {
-        heading: "Benchmarking the landscape",
-        body: [
-          "We audited how existing video tools handled navigation, uploading, editing, management, and AI. The takeaway: most were either hard to navigate or lacked built-in editing — leaving a gap for a clean, purpose-built clinical editor with a clear stepper-driven upload.",
-        ],
-        image: {
-          src: "/projects/genesis-features.jpg",
-          alt: "Feature comparison across competing video platforms",
-          caption: "Comparing navigation, uploading, editing, and use of AI.",
-        },
-      },
-      {
-        heading: "Designing the flow",
-        body: [
-          "We explored routing users directly to the editing page after upload versus a lighter multi-step path, and tested one-page versus three-page upload forms to reduce information overload while keeping each step scannable.",
-          "A recurring theme was minimizing zig-zag eye movement across the form, so we aligned fields into a single predictable column and used a pre-processing state to guide users into the editor.",
+          "A two-part flow: a guided upload with AI-prefilled surgery descriptions and automated flagging of patient-identifiable frames, and an AI-assisted editor that surfaces unusable and sensitive clips for surgeon review before publishing.",
         ],
         image: {
           src: "/projects/genesis-mobile.jpg",
-          alt: "Mobile upload flow explorations for Genesis MedTech",
-          caption: "Exploring upload entry points and layouts.",
+          alt: "Guided upload flow for the Genesis MedTech video platform",
+          caption: "The guided, stepped upload flow leading into the editor.",
         },
+      },
+      {
+        heading: "Process & Key Decisions",
+        body: [],
+        subsections: [
+          {
+            title: "Upload flow — processing page vs. direct-to-editor",
+            body: "I mapped two navigation directions and ran a comparative usability study. The version showing a processing state before the editor scored 89% usability, better matching users' mental models.",
+          },
+          {
+            title: "Stepped input, driven by user confidence",
+            body: "Research showed surgeons don't mind manual data entry — they mind re-entering data that already lives in hospital systems. Testing a 3-step form against a single-screen form, users preferred the stepped version because breaking up the task built confidence. This insight also shaped our push to auto-populate post-surgery data from partner hospitals (10+ onboarded so far).",
+          },
+          {
+            title: "Legal disclosures — advocating through evidence",
+            body: "Legal wanted dense disclosures on the upload page. Rather than push back directly, I mocked it up and tested with surgeons; the results showed the text was overwhelming, and I successfully proposed moving it to a separate static page so users could stay focused.",
+          },
+          {
+            title: "Sensitive-clip UI — clarity over alarm",
+            body: "For AI-flagged sensitive frames, I tested a cautionary orange treatment against a neutral, on-brand blue with plain-language copy. Surgeons — being highly educated and prone to over-reading UI — strongly preferred the calmer version, which scored significantly higher. We paired this with a “confirm deletions” pattern (over grayed-out restores) that users found clearer and more controllable.",
+          },
+          {
+            title: "Scoping with trade-offs",
+            body: "Using an NN/g-based trade-off framework weighing user value against budget and timeline, the team scored features through structured voting. The Pen Tool ranked lowest (7.5) — still “desired,” but deferred from the 2025 roadmap to protect MVP focus.",
+          },
+          {
+            title: "Validation checkpoints",
+            body: "A tree test on our IA returned 92% success with a 7-second median time-on-task, and mid-fidelity usability testing confirmed all key editing tools met expectations.",
+          },
+        ],
+      },
+      {
+        heading: "Outcomes",
+        body: ["The pilot shipped to partner hospitals with aligned success metrics:"],
+        bullets: [
+          "85% surgeon satisfaction during upload",
+          "68% editing retention at MVP (vs. 60% benchmark)",
+          "AI error rates (auto-fill, blank-scene removal) held under 20%",
+        ],
+        subsections: [
+          {
+            title: "Next steps",
+            body: "Gather pilot feedback to refine real needs, iterate editing flows from usage data, improve AI description accuracy, and explore community features in later phases.",
+          },
+        ],
+      },
+      {
+        heading: "Lessons Learned",
+        body: [
+          "Designing for surgeons taught me that expertise changes how people read an interface. Highly educated users over-analyzed our UI copy and found cautionary visuals alarming — so clarity and calm outperformed “helpful” emphasis at every turn.",
+          "I also learned to advocate through evidence, not opinion: when Legal pushed for dense on-page disclosures, a quick mockup and user test moved the decision faster than any argument could.",
+          "Most of all, I saw that in high-stakes domains, earning user trust isn't a final polish — it's the design constraint that shapes every flow.",
+        ],
       },
     ],
   },
