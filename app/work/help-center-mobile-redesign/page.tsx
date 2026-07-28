@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getProject } from "@/lib/projects";
@@ -5,12 +6,12 @@ import { getProject } from "@/lib/projects";
 /**
  * Bespoke case-study layout for the Help Center redesign, built to match the
  * Figma at node 71:19407. This is a static route, so it takes precedence over
- * the shared `app/work/[slug]/page.tsx` template — Genesis and External
- * Transfer continue to render from that template untouched.
+ * the shared `app/work/[slug]/page.tsx` template.
  *
- * Image panels are placeholders pending export from Figma. Each one states the
- * asset it expects and holds the exact aspect ratio from the design, so the
- * page reads at its true length before the visuals land.
+ * Panel images are rendered from the Figma `Background` nodes. They already
+ * carry the grey panel and its 48px corner radius baked in, so they need no
+ * wrapper styling. Blocks whose Figma section has no visual render full-width
+ * text rather than a half-empty row.
  */
 
 const project = getProject("help-center-mobile-redesign")!;
@@ -28,16 +29,24 @@ const NAV = [
   { label: "Lesson Learned", href: "#lessons" },
 ];
 
-const SOLUTIONS = [
+type Block = {
+  title: string;
+  body: string;
+  images?: { src: string; w: number; h: number }[];
+};
+
+const img = (src: string, w: number, h: number) => ({ src, w, h });
+
+const SOLUTIONS: Block[] = [
   {
     title: "Locator",
     body: "A Locator with accessible, distinct icons replacing ambiguous color-only differentiation, breadcrumbs for orientation, and filters repositioned for lower cognitive load",
-    asset: "Locator screens",
+    images: [img("/projects/hc-locator.jpg", 624, 774)],
   },
   {
     title: "Request a Call flow",
     body: "A Request a Call flow restructured to route all account types (not just personal banking) to the correct helpline, with simplified language and clearer page hierarchy.",
-    asset: "Request a Call screens",
+    images: [img("/projects/hc-request-a-call.jpg", 624, 774)],
   },
 ];
 
@@ -56,7 +65,7 @@ const OUTCOMES = [
       "NPS improved from 6 to 7.5",
       "Users now reach location details in under 1 second",
     ],
-    asset: "Locator before / after",
+    images: [img("/projects/hc-outcomes-locator.jpg", 624, 340)],
   },
   {
     title: "Request a Call Flow",
@@ -64,59 +73,65 @@ const OUTCOMES = [
       "Request a Call task success: 56% → 88%",
       "NPS improved from 6 to 8",
     ],
-    asset: "Request a Call before / after",
+    images: [img("/projects/hc-outcomes-call.jpg", 624, 340)],
   },
 ];
 
-const PROCESS = [
+const PROCESS: Block[] = [
   {
     title: "Icons lead to confusion",
     body: "Users assumed colorful icons were interactive, then abandoned the flow when they weren't. Our decision was to replace the old icons with accessible pictorial + word-mark icons, validated with the accessibility team.",
-    asset: "Icon exploration",
+    images: [
+      img("/projects/hc-icons-1.jpg", 624, 774),
+      img("/projects/hc-icons-2.jpg", 624, 774),
+    ],
   },
   {
     title: "Duo entry points lead to confusion",
     body: "Users felt overwhelmed by dual interactions on the small search bar and often experienced fat-fingering issues, which, as confirmed by PNC's accessibility coach, also failed to meet the bank's WCAG triple A standard. To reduce interaction and cognitive load, I separated the filters from the search bar. After exploring placement options and accounting for top notifications, I positioned the filters at the bottom.",
-    asset: "Filter placement explorations",
+    images: [
+      img("/projects/hc-filters-1.jpg", 624, 774),
+      img("/projects/hc-filters-2.jpg", 624, 774),
+    ],
   },
   {
     title: "Enhancing the request a call work flow",
     body: "Knowing the flow worked for supported accounts, but failed for 46% of users, I worked with Product Owner Frank and developer Divya to inventory unsupported accounts and their specific phone numbers",
-    asset: "Account routing inventory",
   },
   {
     title: "6 Minutes Saved",
     body: "Users can now be routed to the right helpline, which saves them an average of 6 minutes.",
-    asset: "Routing outcome",
   },
   {
     title: "Building visual consistency and clear content",
     body: "Besides, looking at the overall experience, the flow had redundant, unclear content and confusing grouping of information, so I partnered with content designer Jenny to simplify language, unify content standards, and ensure users clearly understand each button and choice.",
-    asset: "Content standards",
   },
   {
     title: "Restructuring for Clarity",
     body: "Since Help Center features are self-explanatory, we removed redundant top text and subtext to keep focus on the main message. For the sake of time, not going to mention some other feature level changes on this page.",
-    asset: "Before / after hierarchy",
+    images: [img("/projects/hc-clarity.jpg", 1152, 780)],
   },
   {
     title: "Aligning IA with how users actually think.",
     body: "Additionally, we restructured the page IA by moving generic inquiry selection to a secondary action, aligning with users' mental models, clarifying progress, and reducing uncertainty.",
-    asset: "IA restructure",
   },
 ];
 
-/** Placeholder standing in for a Figma export, holding the designed aspect. */
-function ImagePanel({ label, ratio = "aspect-[624/340]" }: { label: string; ratio?: string }) {
+function Panels({ images, alt }: { images: Block["images"]; alt: string }) {
+  if (!images?.length) return null;
   return (
-    <div
-      className={`flex w-full items-center justify-center rounded-panel-lg bg-surface ${ratio}`}
-      role="img"
-      aria-label={`Placeholder for ${label}`}
-    >
-      <span className="px-6 text-center text-label uppercase tracking-label text-ink-muted">
-        {label}
-      </span>
+    <div className="flex flex-col gap-6">
+      {images.map((im, i) => (
+        <Image
+          key={im.src}
+          src={im.src}
+          alt={images.length > 1 ? `${alt} (${i + 1} of ${images.length})` : alt}
+          width={im.w}
+          height={im.h}
+          sizes="(max-width: 768px) 100vw, 624px"
+          className="h-auto w-full"
+        />
+      ))}
     </div>
   );
 }
@@ -126,6 +141,25 @@ function SectionHeading({ id, children }: { id: string; children: React.ReactNod
     <h2 id={id} className="scroll-mt-24 text-2xl font-medium leading-8 text-ink">
       {children}
     </h2>
+  );
+}
+
+function SplitBlock({ title, body, images }: Block) {
+  const hasImages = Boolean(images?.length);
+  return (
+    <div
+      className={
+        hasImages
+          ? "grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32"
+          : "py-6"
+      }
+    >
+      <div className="flex flex-col gap-2 pt-3">
+        <h3 className="text-lg font-medium leading-6 text-ink">{title}</h3>
+        <p className="max-w-3xl leading-relaxed text-ink-muted">{body}</p>
+      </div>
+      <Panels images={images} alt={title} />
+    </div>
   );
 }
 
@@ -193,16 +227,7 @@ export default function HelpCenterCaseStudy() {
       <section className="mt-11 flex flex-col gap-6">
         <SectionHeading id="solution">Key Solution</SectionHeading>
         {SOLUTIONS.map((s) => (
-          <div
-            key={s.title}
-            className="grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32"
-          >
-            <div className="flex flex-col gap-2 pt-3">
-              <h3 className="text-lg font-medium leading-6 text-ink">{s.title}</h3>
-              <p className="leading-relaxed text-ink-muted">{s.body}</p>
-            </div>
-            <ImagePanel label={s.asset} ratio="aspect-[624/773]" />
-          </div>
+          <SplitBlock key={s.title} {...s} />
         ))}
       </section>
 
@@ -224,7 +249,14 @@ export default function HelpCenterCaseStudy() {
             </li>
           ))}
         </ul>
-        <ImagePanel label="Research synthesis" ratio="aspect-[1152/720]" />
+        <Image
+          src="/projects/hc-research.jpg"
+          alt="Research synthesis from app reviews and call centre data"
+          width={1152}
+          height={720}
+          sizes="(max-width: 1200px) 100vw, 1152px"
+          className="mt-2 h-auto w-full"
+        />
       </section>
 
       {/* Outcomes & Impact */}
@@ -245,7 +277,7 @@ export default function HelpCenterCaseStudy() {
                 ))}
               </ul>
             </div>
-            <ImagePanel label={o.asset} ratio="aspect-[624/340]" />
+            <Panels images={o.images} alt={o.title} />
           </div>
         ))}
       </section>
@@ -260,35 +292,18 @@ export default function HelpCenterCaseStudy() {
           quotes into thematic groups, with two recurring sentiments emerging.
         </p>
         {PROCESS.map((p) => (
-          <div
-            key={p.title}
-            className="grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32"
-          >
-            <div className="flex flex-col gap-2 pt-3">
-              <h3 className="text-lg font-medium leading-6 text-ink">{p.title}</h3>
-              <p className="leading-relaxed text-ink-muted">{p.body}</p>
-            </div>
-            <ImagePanel label={p.asset} ratio="aspect-[624/440]" />
-          </div>
+          <SplitBlock key={p.title} {...p} />
         ))}
       </section>
 
       {/* Other Contribution */}
       <section className="mt-11 flex flex-col gap-6">
         <SectionHeading id="other">Other Contribution</SectionHeading>
-        <div className="grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32">
-          <div className="flex flex-col gap-2 pt-3">
-            <h3 className="text-lg font-medium leading-6 text-ink">
-              Accessibility as a lasting standard, not a checkbox.
-            </h3>
-            <p className="leading-relaxed text-ink-muted">
-              Collaborated with PNC&rsquo;s accessibility coach to bring the Locator and
-              icon system up to WCAG AAA standards — work that later informed
-              accessibility practices beyond this project.
-            </p>
-          </div>
-          <ImagePanel label="Accessibility audit" ratio="aspect-[624/275]" />
-        </div>
+        <SplitBlock
+          title="Accessibility as a lasting standard, not a checkbox."
+          body="Collaborated with PNC's accessibility coach to bring the Locator and icon system up to WCAG AAA standards — work that later informed accessibility practices beyond this project."
+          images={[img("/projects/hc-accessibility.jpg", 624, 275)]}
+        />
       </section>
 
       {/* Lessons Learned */}
