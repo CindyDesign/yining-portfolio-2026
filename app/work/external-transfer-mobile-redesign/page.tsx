@@ -1,14 +1,16 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getProject } from "@/lib/projects";
 
 /**
  * Bespoke case-study layout for the External Transfer redesign, built to match
- * the Figma at node 10:630. Static route, so it takes precedence over the
- * shared `app/work/[slug]/page.tsx` template — Genesis still renders there.
+ * the Figma at node 10:630. Static route, taking precedence over the shared
+ * `app/work/[slug]/page.tsx` template.
  *
- * Image panels are placeholders pending export from Figma; each names the
- * asset it expects.
+ * Panel images come from the Figma `Background` nodes and carry the grey panel
+ * and 48px radius baked in. Blocks with no visual in the design render as
+ * full-width text.
  */
 
 const project = getProject("external-transfer-mobile-redesign")!;
@@ -27,21 +29,29 @@ const NAV = [
   { label: "Lesson Learned", href: "#lessons" },
 ];
 
-const SOLUTIONS = [
+type Block = {
+  title: string;
+  body: string;
+  images?: { src: string; w: number; h: number }[];
+};
+
+const img = (src: string, w: number, h: number) => ({ src, w, h });
+
+const SOLUTIONS: Block[] = [
   {
     title: "Instant verification so no wait times",
     body: "Successfully aligned product, engineering, and risk partners to abandon legacy trial deposits, transitioning the platform toward real-time account verification to boost activation velocity and user trust.",
-    asset: "Instant verification flow",
+    images: [img("/projects/et-instant-verify.jpg", 624, 774)],
   },
   {
     title: "16 Steps of Verification to 8 Steps",
     body: "Collapsed redundant verification steps by combining trial-deposit confirmation with additional identity verification into a single pass.",
-    asset: "Collapsed verification steps",
+    images: [img("/projects/et-collapsed-steps.jpg", 624, 774)],
   },
   {
     title: "Consistent Transfer Interaction Pattern",
     body: "Established one consistent transfer flow from entry point to success screen so the experience felt identical whether a user started from account overview, transfers, or settings.",
-    asset: "Consistent transfer pattern",
+    images: [img("/projects/et-consistent-flow.jpg", 624, 774)],
   },
 ];
 
@@ -73,23 +83,20 @@ const OUTCOMES = [
   "100K+ users moved through instant verification",
 ];
 
-const PROCESS = [
+const PROCESS: Block[] = [
   {
     title:
       "Listening to user desire to upgrade from trial deposits to real-time verification",
     body: "While trial deposits were historically favored as a secure ownership proof, we leveraged customer advocacy insights to align partners around a modern paradigm: micro-deposits are now less secure than real-time one-time passcodes and add unnecessary friction without protecting the user.",
-    asset: "Verification paradigm shift",
   },
   {
     title: "Cut enrollment process from 16 steps into 10 steps",
     body: "Redesigned and consolidated a legacy 16-step pre-enrollment and post-enrollment flow into a highly optimized 10-step experience, while mapping out a future-state architecture to reduce the entire funnel to 6 friction-free steps.",
-    asset: "Step reduction map",
   },
   {
     title:
       "Establish global pattern consistency to enable seamless, intuitive interactions",
     body: "The goal across all enhancements is consistency: when the same element behaves predictably, users can complete tasks without learning new patterns.",
-    asset: "Pattern consistency overview",
   },
   {
     // Figma repeats the previous block's heading here. The original copy in
@@ -97,44 +104,48 @@ const PROCESS = [
     // so this block needed a title of its own — written to match its body.
     title: "A single, predictable input order",
     body: "Led a generative card-sorting workshop to restructure the six core transaction fields, converging on a single, high-predictability input order that mirrors user mental models.",
-    asset: "Card-sorting workshop",
+    images: [img("/projects/et-card-sorting.jpg", 624, 774)],
   },
   {
     title: "Consistent entry points, clearer guidance",
     body: "Standardized transfer entry points for a consistent look, added a prominent visual tile for clarity, and included subtext for user guidance.",
-    asset: "Entry point standardization",
+    images: [img("/projects/et-entry-points.jpg", 1152, 774)],
   },
   {
     title: "Clear hierarchy, distinct information levels",
     body: "Established a clear visual hierarchy across all pages, ensuring content, containers, and background colors create distinction between different levels of information.",
-    asset: "Visual hierarchy system",
+    images: [img("/projects/et-hierarchy.jpg", 1152, 774)],
   },
 ];
 
-const OTHER = [
+const OTHER: Block[] = [
   {
     title: "AI-assisted design system building",
     body: "I used AI to systematically stress-test our newly structured transaction fields — generating robust copy and data states for edge cases.",
-    asset: "AI-assisted field testing",
+    images: [img("/projects/et-ai-fields.jpg", 624, 624)],
   },
   {
     title: "QA testing",
     body: "Partnered with engineering to sequence backend verification changes alongside the UI rebuild, ensuring the compressed flow didn't outpace fraud/compliance checks.",
-    asset: "QA sequencing",
+    images: [img("/projects/et-qa.jpg", 1177, 265)],
   },
 ];
 
-/** Placeholder standing in for a Figma export, holding the designed aspect. */
-function ImagePanel({ label, ratio = "aspect-[624/340]" }: { label: string; ratio?: string }) {
+function Panels({ images, alt }: { images: Block["images"]; alt: string }) {
+  if (!images?.length) return null;
   return (
-    <div
-      className={`flex w-full items-center justify-center rounded-panel-lg bg-surface ${ratio}`}
-      role="img"
-      aria-label={`Placeholder for ${label}`}
-    >
-      <span className="px-6 text-center text-label uppercase tracking-label text-ink-muted">
-        {label}
-      </span>
+    <div className="flex flex-col gap-6">
+      {images.map((im, i) => (
+        <Image
+          key={im.src}
+          src={im.src}
+          alt={images.length > 1 ? `${alt} (${i + 1} of ${images.length})` : alt}
+          width={im.w}
+          height={im.h}
+          sizes="(max-width: 768px) 100vw, 624px"
+          className="h-auto w-full"
+        />
+      ))}
     </div>
   );
 }
@@ -147,24 +158,21 @@ function SectionHeading({ id, children }: { id: string; children: React.ReactNod
   );
 }
 
-function SplitBlock({
-  title,
-  body,
-  asset,
-  ratio,
-}: {
-  title: string;
-  body: string;
-  asset: string;
-  ratio?: string;
-}) {
+function SplitBlock({ title, body, images }: Block) {
+  const hasImages = Boolean(images?.length);
   return (
-    <div className="grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32">
+    <div
+      className={
+        hasImages
+          ? "grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32"
+          : "py-6"
+      }
+    >
       <div className="flex flex-col gap-2 pt-3">
         <h3 className="text-lg font-medium leading-6 text-ink">{title}</h3>
-        <p className="leading-relaxed text-ink-muted">{body}</p>
+        <p className="max-w-3xl leading-relaxed text-ink-muted">{body}</p>
       </div>
-      <ImagePanel label={asset} ratio={ratio} />
+      <Panels images={images} alt={title} />
     </div>
   );
 }
@@ -234,7 +242,7 @@ export default function ExternalTransferCaseStudy() {
       <section className="mt-11 flex flex-col gap-6">
         <SectionHeading id="solution">The Solution</SectionHeading>
         {SOLUTIONS.map((s) => (
-          <SplitBlock key={s.title} {...s} ratio="aspect-[624/773]" />
+          <SplitBlock key={s.title} {...s} />
         ))}
       </section>
 
@@ -254,7 +262,6 @@ export default function ExternalTransferCaseStudy() {
             </li>
           ))}
         </ul>
-        <ImagePanel label="Enrollment funnel breakdown" ratio="aspect-[1152/560]" />
       </section>
 
       {/* Outcomes & Impact */}
@@ -264,20 +271,30 @@ export default function ExternalTransferCaseStudy() {
           Product already shipped to production; live in PNC&rsquo;s mobile app.
         </p>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          {HEADLINE_STATS.map((s) => (
-            <div
-              key={s.label}
-              className="flex flex-col gap-1 rounded-panel bg-surface p-8"
-            >
-              <span className="text-4xl font-normal tracking-tight text-ink-strong">
-                {s.value}
-              </span>
-              <span className="text-label uppercase tracking-label text-ink-muted">
-                {s.label}
-              </span>
-            </div>
-          ))}
+        <div className="grid items-start gap-8 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32">
+          <div className="flex flex-col gap-4">
+            {HEADLINE_STATS.map((s) => (
+              <div
+                key={s.label}
+                className="flex flex-col gap-1 rounded-panel bg-surface p-8"
+              >
+                <span className="text-4xl font-normal tracking-tight text-ink-strong">
+                  {s.value}
+                </span>
+                <span className="text-label uppercase tracking-label text-ink-muted">
+                  {s.label}
+                </span>
+              </div>
+            ))}
+          </div>
+          <Image
+            src="/projects/et-outcomes.jpg"
+            alt="External transfer outcomes"
+            width={624}
+            height={624}
+            sizes="(max-width: 768px) 100vw, 624px"
+            className="h-auto w-full"
+          />
         </div>
 
         <ul className="grid gap-4 sm:grid-cols-2">
@@ -297,8 +314,8 @@ export default function ExternalTransferCaseStudy() {
         <SectionHeading id="process">
           Deep Dive: Process, Iterations, and Trade-offs
         </SectionHeading>
-        {PROCESS.map((p, i) => (
-          <SplitBlock key={`${p.title}-${i}`} {...p} ratio="aspect-[624/440]" />
+        {PROCESS.map((p) => (
+          <SplitBlock key={p.title} {...p} />
         ))}
       </section>
 
@@ -306,7 +323,7 @@ export default function ExternalTransferCaseStudy() {
       <section className="mt-11 flex flex-col gap-6">
         <SectionHeading id="other">Other Contribution</SectionHeading>
         {OTHER.map((o) => (
-          <SplitBlock key={o.title} {...o} ratio="aspect-[624/275]" />
+          <SplitBlock key={o.title} {...o} />
         ))}
       </section>
 
