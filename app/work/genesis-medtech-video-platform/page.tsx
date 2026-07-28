@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getProject } from "@/lib/projects";
@@ -7,8 +8,9 @@ import { getProject } from "@/lib/projects";
  * the Figma at node 60:19068. Static route, taking precedence over the shared
  * `app/work/[slug]/page.tsx` template.
  *
- * Copy follows the Figma, with typos corrected — see the commit message for
- * the full list. Image panels are placeholders pending export.
+ * Panel images come from the Figma `Background`/`Pen` nodes and carry the grey
+ * panel and 48px radius baked in. Six blocks have no visual in the design and
+ * render as full-width text.
  */
 
 const project = getProject("genesis-medtech-video-platform")!;
@@ -27,16 +29,22 @@ const NAV = [
   { label: "Lessons Learned", href: "#lessons" },
 ];
 
-const SOLUTIONS = [
+type Block = {
+  title: string;
+  body: string;
+  images?: { src: string; w: number; h: number }[];
+};
+
+const img = (src: string, w: number, h: number) => ({ src, w, h });
+
+const SOLUTIONS: Block[] = [
   {
     title: "Uploading Process",
     body: "A guided upload with AI-prefilled surgery descriptions and automated flagging of patient-identifiable frames.",
-    asset: "Guided upload flow",
   },
   {
     title: "AI-assisted editor",
     body: "AI-assisted editor that surfaces unusable and sensitive clips for surgeon review before publishing.",
-    asset: "AI-assisted editor",
   },
 ];
 
@@ -48,6 +56,7 @@ const OUTCOMES = [
       "Reduce video-editing time by 15%",
       "AI efficiency in both uploading and editing",
     ],
+    images: [img("/projects/gen-outcomes-surgeons.jpg", 624, 340)],
   },
   {
     lead: "For Genesis MedTech, the product achieved the goals:",
@@ -56,71 +65,78 @@ const OUTCOMES = [
       "68% editing retention at MVP",
       "AI error rates (auto-fill) held under 20%",
     ],
+    images: [img("/projects/gen-outcomes-company.jpg", 624, 340)],
   },
 ];
 
-const PROCESS = [
+const PROCESS: Block[] = [
   {
     title: "Upload flow — processing page vs. direct-to-editor",
     body: "I mapped two navigation directions and ran a comparative usability study. The version showing a processing state before the editor scored 89% usability, better matching users' mental models.",
-    asset: "Navigation comparison",
   },
   {
     title: "Stepped input, driven by user confidence",
     body: "Research showed surgeons don't mind manual data entry — they mind re-entering data that already lives in hospital systems. Testing a 3-step form against a single-screen form, users preferred the stepped version because breaking up the task built confidence. This insight also shaped our push to auto-populate post-surgery data from partner hospitals (10+ onboarded so far).",
-    asset: "Stepped form testing",
+    images: [
+      img("/projects/gen-stepped-1.jpg", 624, 624),
+      img("/projects/gen-stepped-2.jpg", 624, 624),
+    ],
   },
   {
     title: "Advocating legal disclosures through evidence",
     body: "Legal wanted dense disclosures on the upload page. Rather than push back directly, I mocked it up and tested with surgeons; the results showed the text was overwhelming, and I successfully proposed moving it to a separate static page so users could stay focused.",
-    asset: "Disclosure mockups",
   },
   {
     title: "Helping surgeons save time and mental effort on editing",
     body: "For the AI-integrated one-click editing, I collaborated with the AI engineering team to understand current strengths and technical limitations. Internal data set the range we designed for — the longest surgery video ran 36 hours, with a median length of 3 hours — so we designed for edge cases to improve inclusivity, reliability, and usability for all users.",
-    asset: "One-click editing",
   },
   {
     title: "Sensitive-clip UI — clarity over alarm",
     body: "For AI-flagged sensitive frames, I tested a cautionary orange treatment against a neutral, on-brand blue with plain-language copy. Surgeons — being highly educated and prone to over-reading UI — strongly preferred the calmer version, which scored significantly higher. We paired this with a “confirm deletions” pattern (over grayed-out restores) that users found clearer and more controllable.",
-    asset: "Sensitive-clip treatments",
+    images: [
+      img("/projects/gen-sensitive-1.jpg", 624, 624),
+      img("/projects/gen-sensitive-2.jpg", 624, 624),
+    ],
   },
   {
     title: "Usability testing on the AI editing feature",
     body: "We designed quick-access entry points for common editing tools. We conducted mid-fidelity usability testing to ensure users could easily find and use each editing feature. All key tools met user expectations.",
-    asset: "Usability testing",
+    images: [img("/projects/gen-usability.jpg", 1152, 774)],
   },
   {
     title: "Scoping with trade-offs",
     body: "Using an NN/g-based trade-off framework weighing user value against budget and timeline, the team scored features through structured voting. The Pen Tool ranked lowest (7.5) — still “desired,” but deferred from the 2025 roadmap to protect MVP focus.",
-    asset: "Trade-off framework",
+    images: [img("/projects/gen-tradeoffs.jpg", 1152, 774)],
   },
 ];
 
-const NEXT_STEPS = [
+const NEXT_STEPS: Block[] = [
   {
     title: "Post-launch: listen, iterate, expand.",
     body: "We collected real feedback from pilot users and realized the model's outputs were basic — but users said ~80% of their surgeries are routine, and they'd still use the AI-generated text as a starting point. We decided to continue refining the AI pre-fill feature and monitor engagement post-release.",
-    asset: "Pilot feedback",
+    images: [img("/projects/gen-next-steps.jpg", 624, 200)],
   },
   {
     title: "Validated demand, real integrations underway.",
     body: "Users want post-surgery data to auto-populate the form, so we confirmed technical feasibility with the dev lead and secured legal and data-sharing approvals with partner hospitals. We've onboarded 10+ affiliate hospitals so far and are actively expanding integration coverage.",
-    asset: "Hospital integrations",
   },
 ];
 
-/** Placeholder standing in for a Figma export, holding the designed aspect. */
-function ImagePanel({ label, ratio = "aspect-[624/340]" }: { label: string; ratio?: string }) {
+function Panels({ images, alt }: { images: Block["images"]; alt: string }) {
+  if (!images?.length) return null;
   return (
-    <div
-      className={`flex w-full items-center justify-center rounded-panel-lg bg-surface ${ratio}`}
-      role="img"
-      aria-label={`Placeholder for ${label}`}
-    >
-      <span className="px-6 text-center text-label uppercase tracking-label text-ink-muted">
-        {label}
-      </span>
+    <div className="flex flex-col gap-6">
+      {images.map((im, i) => (
+        <Image
+          key={im.src}
+          src={im.src}
+          alt={images.length > 1 ? `${alt} (${i + 1} of ${images.length})` : alt}
+          width={im.w}
+          height={im.h}
+          sizes="(max-width: 768px) 100vw, 624px"
+          className="h-auto w-full"
+        />
+      ))}
     </div>
   );
 }
@@ -133,24 +149,21 @@ function SectionHeading({ id, children }: { id: string; children: React.ReactNod
   );
 }
 
-function SplitBlock({
-  title,
-  body,
-  asset,
-  ratio,
-}: {
-  title: string;
-  body: string;
-  asset: string;
-  ratio?: string;
-}) {
+function SplitBlock({ title, body, images }: Block) {
+  const hasImages = Boolean(images?.length);
   return (
-    <div className="grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32">
+    <div
+      className={
+        hasImages
+          ? "grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32"
+          : "py-6"
+      }
+    >
       <div className="flex flex-col gap-2 pt-3">
         <h3 className="text-lg font-medium leading-6 text-ink">{title}</h3>
-        <p className="leading-relaxed text-ink-muted">{body}</p>
+        <p className="max-w-3xl leading-relaxed text-ink-muted">{body}</p>
       </div>
-      <ImagePanel label={asset} ratio={ratio} />
+      <Panels images={images} alt={title} />
     </div>
   );
 }
@@ -220,7 +233,7 @@ export default function GenesisCaseStudy() {
       <section className="mt-11 flex flex-col gap-6">
         <SectionHeading id="solution">The Solution</SectionHeading>
         {SOLUTIONS.map((s) => (
-          <SplitBlock key={s.title} {...s} ratio="aspect-[624/773]" />
+          <SplitBlock key={s.title} {...s} />
         ))}
       </section>
 
@@ -234,25 +247,35 @@ export default function GenesisCaseStudy() {
           and limited editing tools force surgeons into separate software to finish their
           videos.
         </p>
-        <ImagePanel label="Platform limitations" ratio="aspect-[1152/560]" />
+        <Image
+          src="/projects/gen-problem.jpg"
+          alt="Limitations of mainstream video platforms for surgical footage"
+          width={1152}
+          height={720}
+          sizes="(max-width: 1200px) 100vw, 1152px"
+          className="mt-2 h-auto w-full"
+        />
       </section>
 
       {/* Outcomes & Impact */}
       <section className="mt-11 flex flex-col gap-6">
         <SectionHeading id="outcomes">Outcomes &amp; Impact</SectionHeading>
         {OUTCOMES.map((group) => (
-          <div key={group.lead} className="flex flex-col gap-4">
-            <p className="leading-relaxed text-ink-muted">{group.lead}</p>
-            <ul className="grid gap-4 sm:grid-cols-3">
-              {group.results.map((r) => (
-                <li
-                  key={r}
-                  className="rounded-panel bg-surface p-6 leading-relaxed text-ink-muted"
-                >
-                  {r}
-                </li>
-              ))}
-            </ul>
+          <div
+            key={group.lead}
+            className="grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32"
+          >
+            <div className="flex flex-col gap-3 pt-3">
+              <p className="leading-relaxed text-ink">{group.lead}</p>
+              <ul className="space-y-2">
+                {group.results.map((r) => (
+                  <li key={r} className="leading-relaxed text-ink-muted">
+                    {r}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Panels images={group.images} alt={group.lead} />
           </div>
         ))}
       </section>
@@ -263,7 +286,7 @@ export default function GenesisCaseStudy() {
           Deep Dive: Process, Iterations, and Trade-offs
         </SectionHeading>
         {PROCESS.map((p) => (
-          <SplitBlock key={p.title} {...p} ratio="aspect-[624/440]" />
+          <SplitBlock key={p.title} {...p} />
         ))}
       </section>
 
@@ -271,7 +294,7 @@ export default function GenesisCaseStudy() {
       <section className="mt-11 flex flex-col gap-6">
         <SectionHeading id="next">Next steps</SectionHeading>
         {NEXT_STEPS.map((n) => (
-          <SplitBlock key={n.title} {...n} ratio="aspect-[624/340]" />
+          <SplitBlock key={n.title} {...n} />
         ))}
       </section>
 
