@@ -59,7 +59,7 @@ export const projects: Project[] = [
     index: "01",
     slug: "help-center-mobile-redesign",
     title: "Redesign Help Center Mobile Experience",
-    period: "Sept. 2025 - Oct 2025",
+    period: "Sept. 2025 - Oct. 2025",
     summary:
       "Reworking PNC's in-app Help Center — used by 10M monthly visitors — so users can find branches and request callbacks without friction.",
     image: "/projects/Help%20Center%20Mobile%20ExperienceThumbnail.jpg",
