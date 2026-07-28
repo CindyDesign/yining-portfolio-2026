@@ -1,0 +1,341 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+import { getProject } from "@/lib/projects";
+
+/**
+ * Bespoke case-study layout for the External Transfer redesign, built to match
+ * the Figma at node 10:630. Static route, so it takes precedence over the
+ * shared `app/work/[slug]/page.tsx` template — Genesis still renders there.
+ *
+ * Image panels are placeholders pending export from Figma; each names the
+ * asset it expects.
+ */
+
+const project = getProject("external-transfer-mobile-redesign")!;
+
+export const metadata: Metadata = {
+  title: project.title,
+  description: project.summary,
+};
+
+const NAV = [
+  { label: "Solution", href: "#solution" },
+  { label: "Problem", href: "#problem" },
+  { label: "Outcomes & Impact", href: "#outcomes" },
+  { label: "Process, Iterations, and Trade-offs", href: "#process" },
+  { label: "Other Contribution", href: "#other" },
+  { label: "Lesson Learned", href: "#lessons" },
+];
+
+const SOLUTIONS = [
+  {
+    title: "Instant verification so no wait times",
+    body: "Successfully aligned product, engineering, and risk partners to abandon legacy trial deposits, transitioning the platform toward real-time account verification to boost activation velocity and user trust.",
+    asset: "Instant verification flow",
+  },
+  {
+    title: "16 Steps of Verification to 8 Steps",
+    body: "Collapsed redundant verification steps by combining trial-deposit confirmation with additional identity verification into a single pass.",
+    asset: "Collapsed verification steps",
+  },
+  {
+    title: "Consistent Transfer Interaction Pattern",
+    body: "Established one consistent transfer flow from entry point to success screen so the experience felt identical whether a user started from account overview, transfers, or settings.",
+    asset: "Consistent transfer pattern",
+  },
+];
+
+const PROBLEMS = [
+  {
+    title: "Multi-day verification wait times",
+    body: "Trial deposits required 1–2 business days before a user could even confirm their external account, killing momentum at the exact moment intent was highest.",
+  },
+  {
+    title: "Redundant steps within enrollment",
+    body: "Enrollment forced users through separate deposit-verification and identity-verification steps that could be collapsed without compromising security.",
+  },
+  {
+    title: "Inconsistent interaction pattern",
+    body: "Inconsistent interaction patterns across the external transfer experience reduced predictability, ultimately undermining the systemic trust that is absolutely critical to a high-fidelity financial transaction flow.",
+  },
+];
+
+const HEADLINE_STATS = [
+  { value: "544K", label: "Total users" },
+  { value: "108K", label: "New Converted users" },
+];
+
+const OUTCOMES = [
+  "+25% improvement in enrollment completion",
+  "108K enrollments processed post-launch",
+  "-49 seconds average reduction in sign-up flow time",
+  "544K external transfer users on the redesigned flow",
+  "100K+ users moved through instance verification",
+];
+
+const PROCESS = [
+  {
+    title:
+      "Listening to user desire to upgrade from trial deposits to real-time verification",
+    body: "While trial deposits were historically favored as a secure ownership proof, we leveraged customer advocacy insights to align partners around a modern paradigm: micro-deposits are now less secure than real-time one-time passcodes and add unnecessary friction without protecting the user.",
+    asset: "Verification paradigm shift",
+  },
+  {
+    title: "Cut enrollment process from 16 steps into 10 steps",
+    body: "Redesigned and consolidated a legacy 16-step pre-enrollment and post-enrollment flow into a highly optimized 10-step experience, while mapping out a future-state architecture to reduce the entire funnel to 6 friction-free steps.",
+    asset: "Step reduction map",
+  },
+  {
+    title:
+      "Establish global pattern consistency to enable seamless, intuitive interactions",
+    body: "The goal across all enhancements is consistency: when the same element behaves predictably, users can complete tasks without learning new patterns.",
+    asset: "Pattern consistency overview",
+  },
+  {
+    title:
+      "Establish global pattern consistency to enable seamless, intuitive interactions",
+    body: "Led a generative card-sorting workshop to restructure the six core transaction fields, converging on a single, high-predictability input order that mirrors user mental models.",
+    asset: "Card-sorting workshop",
+  },
+  {
+    title: "Consistent entry points, clearer guidance",
+    body: "Standardized transfer entry points for a consistent look, added a prominent visual tile for clarity, and included subtext for user guidance.",
+    asset: "Entry point standardization",
+  },
+  {
+    title: "Clear hierarchy, distinct information levels",
+    body: "Established a clear visual hierarchy across all pages, ensuring content, containers, and background colors create distinction between different levels of information.",
+    asset: "Visual hierarchy system",
+  },
+];
+
+const OTHER = [
+  {
+    title: "AI-assisted design system building",
+    body: "I used AI to systematically stress-test our newly structured transaction fields — generating robust copy and data states for edge cases.",
+    asset: "AI-assisted field testing",
+  },
+  {
+    title: "QA testing",
+    body: "Partnered with engineering to sequence backend verification changes alongside the UI rebuild, ensuring the compressed flow didn't outpace fraud/compliance checks.",
+    asset: "QA sequencing",
+  },
+];
+
+/** Placeholder standing in for a Figma export, holding the designed aspect. */
+function ImagePanel({ label, ratio = "aspect-[624/340]" }: { label: string; ratio?: string }) {
+  return (
+    <div
+      className={`flex w-full items-center justify-center rounded-panel-lg bg-surface ${ratio}`}
+      role="img"
+      aria-label={`Placeholder for ${label}`}
+    >
+      <span className="px-6 text-center text-label uppercase tracking-label text-ink-muted">
+        {label}
+      </span>
+    </div>
+  );
+}
+
+function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
+  return (
+    <h2 id={id} className="scroll-mt-24 text-2xl font-medium leading-8 text-ink">
+      {children}
+    </h2>
+  );
+}
+
+function SplitBlock({
+  title,
+  body,
+  asset,
+  ratio,
+}: {
+  title: string;
+  body: string;
+  asset: string;
+  ratio?: string;
+}) {
+  return (
+    <div className="grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32">
+      <div className="flex flex-col gap-2 pt-3">
+        <h3 className="text-lg font-medium leading-6 text-ink">{title}</h3>
+        <p className="leading-relaxed text-ink-muted">{body}</p>
+      </div>
+      <ImagePanel label={asset} ratio={ratio} />
+    </div>
+  );
+}
+
+export default function ExternalTransferCaseStudy() {
+  return (
+    <article className="mx-auto max-w-shell px-6 py-10">
+      <Link
+        href="/#work"
+        className="inline-flex items-center gap-2 text-sm text-ink-muted transition-colors hover:text-ink"
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+          <path
+            d="M14 8H3M7 4L3 8l4 4"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        Back to work
+      </Link>
+
+      {/* Hero */}
+      <header className="mt-10 flex flex-col gap-6">
+        <div className="flex flex-wrap items-center gap-3">
+          {["Design Lead", "Money Movement", "PNC Bank", project.period].map((pill) => (
+            <span
+              key={pill}
+              className="rounded-full border border-ink-hairline px-2 py-1 text-[10px] uppercase leading-4 tracking-[0.6px] text-ink"
+            >
+              {pill}
+            </span>
+          ))}
+        </div>
+
+        <h1 className="max-w-4xl text-4xl font-normal leading-tight tracking-[-1.2px] text-ink-strong sm:text-5xl sm:leading-[48px]">
+          Mobile External Transfer Redesign
+        </h1>
+
+        <p className="max-w-3xl pt-3 leading-6 text-ink-muted">
+          PNC is a top-ten bank in the US, with 10 million people using its native mobile
+          app monthly. I am the lead designer for the external transfer feature, which
+          helps users move money from their PNC accounts to other bank accounts. I
+          overhauled the entire mobile external transfer experience to combat a 45%
+          enrollment abandonment rate that was costing the bank millions. Streamlined the
+          onboarding process and established structural consistency across all payment and
+          transfer flows.
+        </p>
+
+        <nav aria-label="Case study sections" className="flex flex-wrap items-center gap-2 pb-4">
+          {NAV.map((item, i) => (
+            <span key={item.href} className="flex items-center gap-2">
+              {i > 0 && <span className="text-sm text-line">|</span>}
+              <a
+                href={item.href}
+                className="rounded-full px-2.5 py-1 text-sm font-medium text-ink transition-colors hover:text-accent"
+              >
+                {item.label}
+              </a>
+            </span>
+          ))}
+        </nav>
+      </header>
+
+      {/* The Solution */}
+      <section className="mt-11 flex flex-col gap-6">
+        <SectionHeading id="solution">The Solution</SectionHeading>
+        {SOLUTIONS.map((s) => (
+          <SplitBlock key={s.title} {...s} ratio="aspect-[624/773]" />
+        ))}
+      </section>
+
+      {/* The Problem */}
+      <section className="mt-11 flex flex-col gap-6">
+        <SectionHeading id="problem">The Problem</SectionHeading>
+        <p className="max-w-3xl leading-relaxed text-ink-muted">
+          External transfer enrollment was bleeding users before they ever initiated a
+          transaction, resulting in a 35% abandonment rate partway through the process
+          alongside inconsistent interaction patterns during the make-a-transfer process.
+        </p>
+        <ul className="grid gap-4 md:grid-cols-3">
+          {PROBLEMS.map((p) => (
+            <li key={p.title} className="flex flex-col gap-2 rounded-panel bg-surface p-6">
+              <h3 className="text-lg font-medium leading-6 text-ink">{p.title}</h3>
+              <p className="leading-relaxed text-ink-muted">{p.body}</p>
+            </li>
+          ))}
+        </ul>
+        <ImagePanel label="Enrollment funnel breakdown" ratio="aspect-[1152/560]" />
+      </section>
+
+      {/* Outcomes & Impact */}
+      <section className="mt-11 flex flex-col gap-6">
+        <SectionHeading id="outcomes">Outcomes &amp; Impact</SectionHeading>
+        <p className="max-w-3xl leading-relaxed text-ink-muted">
+          Product already shipped to production; live in PNC&rsquo;s mobile app.
+        </p>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          {HEADLINE_STATS.map((s) => (
+            <div
+              key={s.label}
+              className="flex flex-col gap-1 rounded-panel bg-surface p-8"
+            >
+              <span className="text-4xl font-normal tracking-tight text-ink-strong">
+                {s.value}
+              </span>
+              <span className="text-label uppercase tracking-label text-ink-muted">
+                {s.label}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <ul className="grid gap-4 sm:grid-cols-2">
+          {OUTCOMES.map((o) => (
+            <li
+              key={o}
+              className="rounded-panel bg-surface p-6 leading-relaxed text-ink-muted"
+            >
+              {o}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Deep Dive */}
+      <section className="mt-11 flex flex-col gap-6">
+        <SectionHeading id="process">
+          Deep Dive: Process, Iterations, and Trade-offs
+        </SectionHeading>
+        {PROCESS.map((p, i) => (
+          <SplitBlock key={`${p.title}-${i}`} {...p} ratio="aspect-[624/440]" />
+        ))}
+      </section>
+
+      {/* Other Contribution */}
+      <section className="mt-11 flex flex-col gap-6">
+        <SectionHeading id="other">Other Contribution</SectionHeading>
+        {OTHER.map((o) => (
+          <SplitBlock key={o.title} {...o} ratio="aspect-[624/275]" />
+        ))}
+      </section>
+
+      {/* Lesson Learned */}
+      <section className="mt-11 flex flex-col gap-4 pb-12">
+        <SectionHeading id="lessons">Lesson Learned</SectionHeading>
+        <p className="max-w-3xl leading-relaxed text-ink-muted">
+          What I&rsquo;ve learned is that leadership is the driving force behind innovation
+          and growth in the evolving field of product design. Learning through diverse
+          experiences from users and key stakeholders has become a cornerstone of my
+          journey, shaping my perspective and fostering continuous improvement.
+        </p>
+      </section>
+
+      <div className="mt-16 border-t border-line pt-10">
+        <Link
+          href="/#work"
+          className="inline-flex items-center gap-2 text-sm font-medium text-ink transition-colors hover:text-accent"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+            <path
+              d="M14 8H3M7 4L3 8l4 4"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Back to all work
+        </Link>
+      </div>
+    </article>
+  );
+}

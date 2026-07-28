@@ -11,7 +11,10 @@ type Params = { params: Promise<{ slug: string }> };
  * which takes routing precedence. Excluded here so the build doesn't try to
  * prerender two pages at the same path.
  */
-const BESPOKE_SLUGS = new Set(["help-center-mobile-redesign"]);
+const BESPOKE_SLUGS = new Set([
+  "help-center-mobile-redesign",
+  "external-transfer-mobile-redesign",
+]);
 
 export function generateStaticParams() {
   return projects
