@@ -9,6 +9,10 @@ const config: Config = {
         ink: {
           DEFAULT: "#344054",
           muted: "#667085",
+          // Figma color/grey/900 — case-study H1, a step darker than body ink
+          strong: "#101828",
+          // Figma color/grey/600 — pill badge borders
+          hairline: "#475467",
         },
         accent: "#bc532b",
         line: "#d8d5cc",
@@ -18,6 +22,8 @@ const config: Config = {
       borderRadius: {
         // Figma corner radius/32 — project thumbnail panels
         panel: "32px",
+        // Figma corner radius/48 — case-study image panels
+        "panel-lg": "48px",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

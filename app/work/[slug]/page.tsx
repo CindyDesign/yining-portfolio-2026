@@ -6,8 +6,17 @@ import { getProject, projects } from "@/lib/projects";
 
 type Params = { params: Promise<{ slug: string }> };
 
+/**
+ * Help Center has a bespoke layout at app/work/help-center-mobile-redesign/,
+ * which takes routing precedence. Excluded here so the build doesn't try to
+ * prerender two pages at the same path.
+ */
+const BESPOKE_SLUGS = new Set(["help-center-mobile-redesign"]);
+
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return projects
+    .filter((p) => !BESPOKE_SLUGS.has(p.slug))
+    .map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
