@@ -56,10 +56,10 @@ export type Project = {
  */
 export const projects: Project[] = [
   {
-    index: "Q3 2025 - Q4 2025",
+    index: "01",
     slug: "help-center-mobile-redesign",
     title: "Redesign Help Center Mobile Experience",
-    period: "2024",
+    period: "Sept. 2025 - Oct 2025",
     summary:
       "Reworking PNC's in-app Help Center — used by 10M monthly visitors — so users can find branches and request callbacks without friction.",
     image: "/projects/Help%20Center%20Mobile%20ExperienceThumbnail.jpg",
@@ -121,11 +121,11 @@ export const projects: Project[] = [
     ],
   },
   {
-    index: "Q3 - Q4",
+    index: "02",
     slug: "genesis-medtech-video-platform",
     title:
       "Building a 0-to-1 Video Uploading and Editing Platform for Genesis MedTech",
-    period: "2025",
+    period: "July 2025 - Aug. 2025",
     summary:
       "A labor-saving tool that lets doctors upload and edit surgical videos — designed 0-to-1 with a small cross-functional team.",
     image: "/projects/GenesisThumania.jpg",
@@ -229,10 +229,10 @@ export const projects: Project[] = [
     ],
   },
   {
-    index: "01",
+    index: "03",
     slug: "external-transfer-mobile-redesign",
     title: "Mobile External Transfer Redesign — PNC Bank",
-    period: "July 2025 - August 2025",
+    period: "June 2025 - July 2025",
     summary:
       "Redesigned PNC's external transfer flow, cutting a multi-day verification wait to minutes and lifting connected-account rate 35% for 544K+ users.",
     image: "/projects/ExternalTransfer%20MobileThumbnail.jpg",
