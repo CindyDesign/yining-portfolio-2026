@@ -12,6 +12,12 @@ const config: Config = {
         },
         accent: "#bc532b",
         line: "#d8d5cc",
+        // Figma color/grey/100 — thumbnail panel behind project images
+        surface: "#f2f4f7",
+      },
+      borderRadius: {
+        // Figma corner radius/32 — project thumbnail panels
+        panel: "32px",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

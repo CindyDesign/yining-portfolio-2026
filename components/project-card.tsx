@@ -60,7 +60,7 @@ export function ProjectCard({ project, priority }: ProjectCardProps) {
           </span>
         </div>
 
-        <div className="relative aspect-[8/5] w-full shrink-0 overflow-hidden rounded md:w-[600px]">
+        <div className="relative aspect-[8/5] w-full shrink-0 overflow-hidden rounded-panel bg-surface md:w-[600px]">
           <Image
             src={project.image}
             alt={project.imageAlt}
