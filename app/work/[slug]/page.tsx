@@ -14,6 +14,7 @@ type Params = { params: Promise<{ slug: string }> };
 const BESPOKE_SLUGS = new Set([
   "help-center-mobile-redesign",
   "external-transfer-mobile-redesign",
+  "genesis-medtech-video-platform",
 ]);
 
 export function generateStaticParams() {
