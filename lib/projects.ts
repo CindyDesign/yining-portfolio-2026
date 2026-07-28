@@ -127,7 +127,7 @@ export const projects: Project[] = [
       "Building a 0-to-1 Video Uploading and Editing Platform for Genesis MedTech",
     period: "July 2025 - Aug. 2025",
     summary:
-      "A labor-saving tool that lets doctors upload and edit surgical videos — designed 0-to-1 with a small cross-functional team.",
+      "A labor-saving tool that lets doctors upload and edit surgical videos — designed 0-to-1 with a small cross-functional team in a one-month sprint.",
     image: "/projects/GenesisThumania.jpg",
     imageAlt: "Genesis MedTech surgical video editor",
     href: "/work/genesis-medtech-video-platform",

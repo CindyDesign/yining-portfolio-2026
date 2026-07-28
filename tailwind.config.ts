@@ -7,8 +7,8 @@ const config: Config = {
       colors: {
         bg: "#f4f2ec",
         ink: {
-          DEFAULT: "#16181d",
-          muted: "#6b6e76",
+          DEFAULT: "#344054",
+          muted: "#667085",
         },
         accent: "#bc532b",
         line: "#d8d5cc",
