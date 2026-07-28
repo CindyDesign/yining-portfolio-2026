@@ -23,7 +23,7 @@ export function ProjectCard({ project, priority }: ProjectCardProps) {
         className="group flex flex-col gap-8 py-9 md:flex-row md:items-start md:gap-16"
       >
         <div className="flex flex-1 flex-col gap-5 md:pt-1">
-          <span className="text-[13px] font-medium uppercase tracking-[0.06em] text-accent">
+          <span className="text-label font-medium uppercase tracking-label text-accent">
             {project.index} — {project.period}
           </span>
 

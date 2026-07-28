@@ -15,7 +15,7 @@ export function SiteNav() {
         >
           Cindy
         </Link>
-        <ul className="flex items-center gap-10 text-[13px] font-medium uppercase tracking-[0.06em] text-ink">
+        <ul className="flex items-center gap-10 text-label font-medium uppercase tracking-label text-ink">
           {links.map((link) => (
             <li key={link.href}>
               <Link href={link.href} className="transition-opacity hover:opacity-60">

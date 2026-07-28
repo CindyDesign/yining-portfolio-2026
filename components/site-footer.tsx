@@ -28,7 +28,7 @@ export function SiteFooter() {
             </a>
           </div>
 
-          <ul className="flex items-center gap-8 pt-2 text-[13px] font-medium uppercase tracking-[0.06em] text-ink">
+          <ul className="flex items-center gap-8 pt-2 text-label font-medium uppercase tracking-label text-ink">
             {socials.map((s) => (
               <li key={s.label}>
                 <Link
@@ -44,7 +44,7 @@ export function SiteFooter() {
           </ul>
         </div>
 
-        <p className="text-[13px] text-ink-muted">© 2026 Cindy — UX Designer</p>
+        <p className="text-label text-ink-muted">© 2026 Cindy — UX Designer</p>
       </div>
     </footer>
   );

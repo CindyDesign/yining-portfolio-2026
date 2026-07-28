@@ -19,8 +19,13 @@ const config: Config = {
       maxWidth: {
         shell: "1200px",
       },
+      fontSize: {
+        // Eyebrow/meta label size. Bare string sets font-size only, matching
+        // the arbitrary `text-[13px]` it replaces (no line-height side effect).
+        label: "13px",
+      },
       letterSpacing: {
-        label: "0.08em",
+        label: "0.06em",
       },
       transitionTimingFunction: {
         soft: "cubic-bezier(0.22, 1, 0.36, 1)",

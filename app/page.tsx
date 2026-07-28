@@ -8,7 +8,7 @@ export default function HomePage() {
       <Hero />
 
       <section id="work" className="mx-auto max-w-shell px-6 pb-24">
-        <p className="mb-8 text-[13px] font-medium uppercase tracking-[0.06em] text-ink-muted">
+        <p className="mb-8 text-label font-medium uppercase tracking-label text-ink-muted">
           Selected Work
         </p>
         <div className="flex flex-col">
