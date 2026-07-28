@@ -66,7 +66,7 @@ export const projects: Project[] = [
     imageAlt: "PNC Help Center mobile screens",
     href: "/work/help-center-mobile-redesign",
     meta: {
-      role: "UX/UI Design",
+      role: "Product/UI Design",
       team: "1 PM · 4 front-end engineers · 1 UX researcher",
       timeline: "1 month design timeline",
     },

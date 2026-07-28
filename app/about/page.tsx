@@ -26,11 +26,11 @@ export default function AboutPage() {
           <div className="mt-6 space-y-4 text-sm leading-relaxed text-ink-muted sm:text-base">
             <p>
               Hi, I am Cindy. I am a Product Designer who currently works at PNC Bank.
-              I call myself a UX practitioner, making apps and websites easier to
+              I call myself a Product practitioner, making apps and websites easier to
               use on a daily basis.
             </p>
             <p>
-              Drawing from combined expertise exceeding 5+ years in UX design,
+              Drawing from combined expertise exceeding 5+ years in Product design,
               information design, and motion design, I present nimble and swift
               responses to the demands of the ever-changing tech industry.
             </p>
@@ -46,7 +46,7 @@ export default function AboutPage() {
           <hr className="mt-4 border-line" />
           <div className="mt-6 space-y-4 text-sm leading-relaxed text-ink-muted sm:text-base">
             <p>
-              I specialize in UX/UI design, branding, and motion design. Looking
+              I specialize in Product/UI design, branding, and motion design. Looking
               to kickstart a new project or explore a creative collaboration?
               Reach out via email — we&rsquo;re excited to hear from you!
             </p>

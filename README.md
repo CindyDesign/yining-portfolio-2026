@@ -1,6 +1,6 @@
 # Yining Portfolio 2026
 
-Premium minimalist UX portfolio — Next.js (App Router) + Tailwind CSS, deployed on Vercel.
+Premium minimalist Product portfolio — Next.js (App Router) + Tailwind CSS, deployed on Vercel.
 
 Live: [cindyzhangdesign.app](https://cindyzhangdesign.app/)
 
