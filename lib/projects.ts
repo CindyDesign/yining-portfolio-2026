@@ -56,7 +56,7 @@ export type Project = {
  */
 export const projects: Project[] = [
   {
-    index: "03",
+    index: "Q3 2025 - Q4 2025",
     slug: "help-center-mobile-redesign",
     title: "Redesign Help Center Mobile Experience",
     period: "2024",
@@ -121,7 +121,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    index: "02",
+    index: "Q3 2025 - Q4 2025",
     slug: "genesis-medtech-video-platform",
     title:
       "Building a 0-to-1 Video Uploading and Editing Platform for Genesis MedTech",
