@@ -42,7 +42,7 @@ const SOLUTIONS = [
 ];
 
 const PROBLEM_STATS = [
-  "Locator flow success completion rate is only 60%; Request a Call success completion rate is 56% (detractor range)",
+  "Locator flow success completion rate is only 60%; Request a Call success completion rate is 56%",
   "Locator NPS: 6/10; Request a Call NPS: 6.5/10 (detractor range)",
   "Help Center Customer Satisfaction Score: 5.4/10 (below the 7.5 target)",
   "Projected 27% increase in live support costs by Q4 2025 if left unaddressed",
@@ -71,11 +71,11 @@ const OUTCOMES = [
 const PROCESS = [
   {
     title: "Icons lead to confusion",
-    body: "Users assumed colorful icons were interactive, then abandoned the flow when they weren't. Our decision was to replaced the old icons with accessible pictorial + word-mark icons, validated with the accessibility team.",
+    body: "Users assumed colorful icons were interactive, then abandoned the flow when they weren't. Our decision was to replace the old icons with accessible pictorial + word-mark icons, validated with the accessibility team.",
     asset: "Icon exploration",
   },
   {
-    title: "Duo entry point lead to confusion",
+    title: "Duo entry points lead to confusion",
     body: "Users felt overwhelmed by dual interactions on the small search bar and often experienced fat-fingering issues, which, as confirmed by PNC's accessibility coach, also failed to meet the bank's WCAG triple A standard. To reduce interaction and cognitive load, I separated the filters from the search bar. After exploring placement options and accounting for top notifications, I positioned the filters at the bottom.",
     asset: "Filter placement explorations",
   },
@@ -86,12 +86,12 @@ const PROCESS = [
   },
   {
     title: "6 Minutes Saved",
-    body: "Now users who can be routed to the right helpline, which saves more on average 6 minutes of their time.",
+    body: "Users can now be routed to the right helpline, which saves them an average of 6 minutes.",
     asset: "Routing outcome",
   },
   {
     title: "Building visual consistency and clear content",
-    body: "Beside, looking at the overall experience, the flow had redundant, unclear content and confusing grouping of information, so I partnered with content designer Jenny to simplify language and unify content standard and ensure users clearly understand each button and choice.",
+    body: "Besides, looking at the overall experience, the flow had redundant, unclear content and confusing grouping of information, so I partnered with content designer Jenny to simplify language, unify content standards, and ensure users clearly understand each button and choice.",
     asset: "Content standards",
   },
   {
@@ -256,8 +256,8 @@ export default function HelpCenterCaseStudy() {
         <p className="max-w-3xl leading-relaxed text-ink-muted">
           During user interview sessions, I partnered with Product Manager Frank and
           Researcher Drew to pinpoint exactly where and why users were getting stuck in
-          location details or request a callback. I compiled key observation and user
-          quotes into thematic groups, 2 recurring sentiments to emerge.
+          location details or request a callback. I compiled key observations and user
+          quotes into thematic groups, with two recurring sentiments emerging.
         </p>
         {PROCESS.map((p) => (
           <div
@@ -300,8 +300,8 @@ export default function HelpCenterCaseStudy() {
           through smart defaults rather than explanation; plain language matters most in
           high-stakes moments; accessibility is core to trust, not optional. Looking
           ahead, I&rsquo;m exploring agent AI (conversational support) to make help faster
-          and more adaptive, because good UX means respecting users&rsquo; time and
-          intelligence, especially when money is on the line.
+          and more adaptive, because good product design means respecting users&rsquo; time
+          and intelligence, especially when money is on the line.
         </p>
       </section>
 

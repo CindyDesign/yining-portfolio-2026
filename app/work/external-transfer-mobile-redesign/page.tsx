@@ -70,7 +70,7 @@ const OUTCOMES = [
   "108K enrollments processed post-launch",
   "-49 seconds average reduction in sign-up flow time",
   "544K external transfer users on the redesigned flow",
-  "100K+ users moved through instance verification",
+  "100K+ users moved through instant verification",
 ];
 
 const PROCESS = [
@@ -92,8 +92,10 @@ const PROCESS = [
     asset: "Pattern consistency overview",
   },
   {
-    title:
-      "Establish global pattern consistency to enable seamless, intuitive interactions",
+    // Figma repeats the previous block's heading here. The original copy in
+    // projects.ts grouped these three items as bullets under that one heading,
+    // so this block needed a title of its own — written to match its body.
+    title: "A single, predictable input order",
     body: "Led a generative card-sorting workshop to restructure the six core transaction fields, converging on a single, high-predictability input order that mirrors user mental models.",
     asset: "Card-sorting workshop",
   },
