@@ -38,14 +38,196 @@ export type Project = {
 /**
  * Featured work, in render order.
  *
+ * Render order is descending by index (03 → 01), matching the 2026 landing-page
+ * design. The index stays pinned to the project, so numbering is stable even as
+ * the display order changes.
+ *
  * Changelog (2026 rebuild):
  *  - Removed "02 / Dashboard Design from 0-1"
  *  - Added Genesis MedTech 0-to-1 video platform
  *  - Added Help Center mobile redesign
  *  - Card images pulled from the project decks
  *  - Added full case-study content
+ *
+ * Changelog (2026 landing-page redesign):
+ *  - Reordered the grid 03 → 02 → 01
+ *  - Retitled 02 to lead with the 0-to-1 framing
+ *  - Shortened the 02 card summary to the outcome, not the metrics
  */
 export const projects: Project[] = [
+  {
+    index: "03",
+    slug: "help-center-mobile-redesign",
+    title: "Redesign Help Center Mobile Experience",
+    period: "2024",
+    summary:
+      "Reworking PNC's in-app Help Center — used by 10M monthly visitors — so users can find branches and request callbacks without friction.",
+    image: "/projects/Help%20Center%20Mobile%20ExperienceThumbnail.jpg",
+    imageAlt: "PNC Help Center mobile screens",
+    href: "/work/help-center-mobile-redesign",
+    meta: {
+      role: "UX/UI Design",
+      team: "1 PM · 4 front-end engineers · 1 UX researcher",
+      timeline: "1 month design timeline",
+    },
+    hero: {
+      src: "/projects/help-storefront.jpg",
+      alt: "PNC Bank branch storefront",
+    },
+    caseStudy: [
+      {
+        heading: "Overview",
+        body: [
+          "PNC is a top-ten bank in the US, and 10 million people visit the app monthly. The in-app Help Center is where many of them turn when something goes wrong — but the experience made getting help harder than it should be.",
+          "The goal: redesign the Help Center mobile experience so people can reliably find a branch and request a callback.",
+        ],
+      },
+      {
+        heading: "The problem",
+        body: [
+          "Two failures showed up again and again: users couldn't easily find a branch, and users couldn't request a callback. Location details were buried because the locator's features were hidden and scattered across the screen.",
+        ],
+      },
+      {
+        heading: "The cost of friction",
+        body: [
+          "PNC user satisfaction sat at 5.4/10, with an NPS of 6.0 for the locator and 6.5 for 'Request a Call.' Only 60% of users successfully found location details, and 56% succeeded at requesting a call.",
+          "Left unaddressed, real-person call-support costs were projected to rise 27% in 2025 as frustrated customers quietly stopped engaging with their PNC accounts.",
+        ],
+        image: {
+          src: "/projects/help-metrics.jpg",
+          alt: "Baseline satisfaction and NPS metrics for the Help Center",
+          caption: "The baseline: low satisfaction and NPS across key tasks.",
+        },
+      },
+      {
+        heading: "Listening to users",
+        body: [
+          "In interviews, the confusion was vivid. “So I just kept tapping on different colorful icons to see if they would take me somewhere,” one participant told us. Another assumed the edit-filter control was for filtering an address rather than refining locator results.",
+          "These moments confirmed the core issue wasn't missing features — it was discoverability. People couldn't tell what was tappable or where it would lead.",
+        ],
+        image: {
+          src: "/projects/help-interviews.jpg",
+          alt: "Remote user interview sessions",
+          caption: "User interviews surfaced repeated discoverability breakdowns.",
+        },
+      },
+      {
+        heading: "The redesign",
+        body: [
+          "I restructured the locator and 'Request a Call' flows so the primary actions are obvious and consistently placed, replacing scattered colorful icons with a clear hierarchy that guides users to branch details and callback requests in fewer taps.",
+        ],
+      },
+    ],
+  },
+  {
+    index: "02",
+    slug: "genesis-medtech-video-platform",
+    title:
+      "Building a 0-to-1 Video Uploading and Editing Platform for Genesis MedTech",
+    period: "2024",
+    summary:
+      "A labor-saving tool that lets doctors upload and edit surgical videos — designed 0-to-1 with a small cross-functional team.",
+    image: "/projects/GenesisThumania.jpg",
+    imageAlt: "Genesis MedTech surgical video editor",
+    href: "/work/genesis-medtech-video-platform",
+    meta: {
+      role: "Product Designer (led discovery research, IA, and interaction design)",
+      company: "Genesis MedTech",
+      team: "2 PMs · AI engineering · content design",
+      timeline: "Late 2023 – 2025",
+    },
+    hero: {
+      src: "/projects/genesis-editor.jpg",
+      alt: "Genesis MedTech video editor showing surgical footage",
+    },
+    caseStudy: [
+      {
+        heading: "Context",
+        body: [
+          "Genesis MedTech is a global medical device company serving 400+ U.S. hospitals. I joined as the product designer on a team of 2 PMs, AI engineering, and content design, leading discovery research, information architecture, and interaction design.",
+        ],
+      },
+      {
+        heading: "The Problem",
+        body: [
+          "Leading surgeons publish operative videos on platforms like YouTube — to reflect on their own procedures and help younger doctors learn. But mainstream platforms fail them: surgical footage gets misclassified as graphic content and removed, and limited editing tools force surgeons into separate software to finish their videos.",
+          "Genesis's Q4 2023 market research surfaced a consistent signal: senior physicians across community and federal hospitals wanted to create teaching content and build a peer community. I co-led a 3-day (15-hour) alignment workshop with leadership and physician representatives to define the opportunity and product vision.",
+          "Our goal: a labor-saving, all-in-one tool to upload and edit surgical videos, with AI accelerating both.",
+        ],
+        image: {
+          src: "/projects/genesis-team.jpg",
+          alt: "The Genesis MedTech project team collaborating",
+          caption:
+            "A 3-day alignment workshop with leadership and physician representatives.",
+        },
+      },
+      {
+        heading: "Key Solution",
+        body: [
+          "A two-part flow: a guided upload with AI-prefilled surgery descriptions and automated flagging of patient-identifiable frames, and an AI-assisted editor that surfaces unusable and sensitive clips for surgeon review before publishing.",
+        ],
+        image: {
+          src: "/projects/genesis-mobile.jpg",
+          alt: "Guided upload flow for the Genesis MedTech video platform",
+          caption: "The guided, stepped upload flow leading into the editor.",
+        },
+      },
+      {
+        heading: "Process & Key Decisions",
+        body: [],
+        subsections: [
+          {
+            title: "Upload flow — processing page vs. direct-to-editor",
+            body: "I mapped two navigation directions and ran a comparative usability study. The version showing a processing state before the editor scored 89% usability, better matching users' mental models.",
+          },
+          {
+            title: "Stepped input, driven by user confidence",
+            body: "Research showed surgeons don't mind manual data entry — they mind re-entering data that already lives in hospital systems. Testing a 3-step form against a single-screen form, users preferred the stepped version because breaking up the task built confidence. This insight also shaped our push to auto-populate post-surgery data from partner hospitals (10+ onboarded so far).",
+          },
+          {
+            title: "Legal disclosures — advocating through evidence",
+            body: "Legal wanted dense disclosures on the upload page. Rather than push back directly, I mocked it up and tested with surgeons; the results showed the text was overwhelming, and I successfully proposed moving it to a separate static page so users could stay focused.",
+          },
+          {
+            title: "Sensitive-clip UI — clarity over alarm",
+            body: "For AI-flagged sensitive frames, I tested a cautionary orange treatment against a neutral, on-brand blue with plain-language copy. Surgeons — being highly educated and prone to over-reading UI — strongly preferred the calmer version, which scored significantly higher. We paired this with a “confirm deletions” pattern (over grayed-out restores) that users found clearer and more controllable.",
+          },
+          {
+            title: "Scoping with trade-offs",
+            body: "Using an NN/g-based trade-off framework weighing user value against budget and timeline, the team scored features through structured voting. The Pen Tool ranked lowest (7.5) — still “desired,” but deferred from the 2025 roadmap to protect MVP focus.",
+          },
+          {
+            title: "Validation checkpoints",
+            body: "A tree test on our IA returned 92% success with a 7-second median time-on-task, and mid-fidelity usability testing confirmed all key editing tools met expectations.",
+          },
+        ],
+      },
+      {
+        heading: "Outcomes",
+        body: ["The pilot shipped to partner hospitals with aligned success metrics:"],
+        bullets: [
+          "85% surgeon satisfaction during upload",
+          "68% editing retention at MVP (vs. 60% benchmark)",
+          "AI error rates (auto-fill, blank-scene removal) held under 20%",
+        ],
+        subsections: [
+          {
+            title: "Next steps",
+            body: "Gather pilot feedback to refine real needs, iterate editing flows from usage data, improve AI description accuracy, and explore community features in later phases.",
+          },
+        ],
+      },
+      {
+        heading: "Lessons Learned",
+        body: [
+          "Designing for surgeons taught me that expertise changes how people read an interface. Highly educated users over-analyzed our UI copy and found cautionary visuals alarming — so clarity and calm outperformed “helpful” emphasis at every turn.",
+          "I also learned to advocate through evidence, not opinion: when Legal pushed for dense on-page disclosures, a quick mockup and user test moved the decision faster than any argument could.",
+          "Most of all, I saw that in high-stakes domains, earning user trust isn't a final polish — it's the design constraint that shapes every flow.",
+        ],
+      },
+    ],
+  },
   {
     index: "01",
     slug: "external-transfer-mobile-redesign",
@@ -163,178 +345,6 @@ export const projects: Project[] = [
         heading: "Lesson Learned",
         body: [
           "What I've learned is that leadership is the driving force behind innovation and growth in the evolving field of product design. Learning through diverse experiences from users and key stakeholders has become a cornerstone of my journey, shaping my perspective and fostering continuous improvement.",
-        ],
-      },
-    ],
-  },
-  {
-    index: "02",
-    slug: "genesis-medtech-video-platform",
-    title: "Genesis MedTech — AI-Assisted Surgical Video Platform",
-    period: "Late 2023 – 2025",
-    summary:
-      "Designed an all-in-one platform that lets surgeons upload and edit operative videos with AI assistance — reaching 85% surgeon satisfaction on upload and a 68% editing retention rate at MVP (vs. 60% benchmark).",
-    image: "/projects/GenesisThumania.jpg",
-    imageAlt: "Genesis MedTech surgical video editor",
-    href: "/work/genesis-medtech-video-platform",
-    meta: {
-      role: "Product Designer (led discovery research, IA, and interaction design)",
-      company: "Genesis MedTech",
-      team: "2 PMs · AI engineering · content design",
-      timeline: "Late 2023 – 2025",
-    },
-    hero: {
-      src: "/projects/genesis-editor.jpg",
-      alt: "Genesis MedTech video editor showing surgical footage",
-    },
-    caseStudy: [
-      {
-        heading: "Context",
-        body: [
-          "Genesis MedTech is a global medical device company serving 400+ U.S. hospitals. I joined as the product designer on a team of 2 PMs, AI engineering, and content design, leading discovery research, information architecture, and interaction design.",
-        ],
-      },
-      {
-        heading: "The Problem",
-        body: [
-          "Leading surgeons publish operative videos on platforms like YouTube — to reflect on their own procedures and help younger doctors learn. But mainstream platforms fail them: surgical footage gets misclassified as graphic content and removed, and limited editing tools force surgeons into separate software to finish their videos.",
-          "Genesis's Q4 2023 market research surfaced a consistent signal: senior physicians across community and federal hospitals wanted to create teaching content and build a peer community. I co-led a 3-day (15-hour) alignment workshop with leadership and physician representatives to define the opportunity and product vision.",
-          "Our goal: a labor-saving, all-in-one tool to upload and edit surgical videos, with AI accelerating both.",
-        ],
-        image: {
-          src: "/projects/genesis-team.jpg",
-          alt: "The Genesis MedTech project team collaborating",
-          caption:
-            "A 3-day alignment workshop with leadership and physician representatives.",
-        },
-      },
-      {
-        heading: "Key Solution",
-        body: [
-          "A two-part flow: a guided upload with AI-prefilled surgery descriptions and automated flagging of patient-identifiable frames, and an AI-assisted editor that surfaces unusable and sensitive clips for surgeon review before publishing.",
-        ],
-        image: {
-          src: "/projects/genesis-mobile.jpg",
-          alt: "Guided upload flow for the Genesis MedTech video platform",
-          caption: "The guided, stepped upload flow leading into the editor.",
-        },
-      },
-      {
-        heading: "Process & Key Decisions",
-        body: [],
-        subsections: [
-          {
-            title: "Upload flow — processing page vs. direct-to-editor",
-            body: "I mapped two navigation directions and ran a comparative usability study. The version showing a processing state before the editor scored 89% usability, better matching users' mental models.",
-          },
-          {
-            title: "Stepped input, driven by user confidence",
-            body: "Research showed surgeons don't mind manual data entry — they mind re-entering data that already lives in hospital systems. Testing a 3-step form against a single-screen form, users preferred the stepped version because breaking up the task built confidence. This insight also shaped our push to auto-populate post-surgery data from partner hospitals (10+ onboarded so far).",
-          },
-          {
-            title: "Legal disclosures — advocating through evidence",
-            body: "Legal wanted dense disclosures on the upload page. Rather than push back directly, I mocked it up and tested with surgeons; the results showed the text was overwhelming, and I successfully proposed moving it to a separate static page so users could stay focused.",
-          },
-          {
-            title: "Sensitive-clip UI — clarity over alarm",
-            body: "For AI-flagged sensitive frames, I tested a cautionary orange treatment against a neutral, on-brand blue with plain-language copy. Surgeons — being highly educated and prone to over-reading UI — strongly preferred the calmer version, which scored significantly higher. We paired this with a “confirm deletions” pattern (over grayed-out restores) that users found clearer and more controllable.",
-          },
-          {
-            title: "Scoping with trade-offs",
-            body: "Using an NN/g-based trade-off framework weighing user value against budget and timeline, the team scored features through structured voting. The Pen Tool ranked lowest (7.5) — still “desired,” but deferred from the 2025 roadmap to protect MVP focus.",
-          },
-          {
-            title: "Validation checkpoints",
-            body: "A tree test on our IA returned 92% success with a 7-second median time-on-task, and mid-fidelity usability testing confirmed all key editing tools met expectations.",
-          },
-        ],
-      },
-      {
-        heading: "Outcomes",
-        body: ["The pilot shipped to partner hospitals with aligned success metrics:"],
-        bullets: [
-          "85% surgeon satisfaction during upload",
-          "68% editing retention at MVP (vs. 60% benchmark)",
-          "AI error rates (auto-fill, blank-scene removal) held under 20%",
-        ],
-        subsections: [
-          {
-            title: "Next steps",
-            body: "Gather pilot feedback to refine real needs, iterate editing flows from usage data, improve AI description accuracy, and explore community features in later phases.",
-          },
-        ],
-      },
-      {
-        heading: "Lessons Learned",
-        body: [
-          "Designing for surgeons taught me that expertise changes how people read an interface. Highly educated users over-analyzed our UI copy and found cautionary visuals alarming — so clarity and calm outperformed “helpful” emphasis at every turn.",
-          "I also learned to advocate through evidence, not opinion: when Legal pushed for dense on-page disclosures, a quick mockup and user test moved the decision faster than any argument could.",
-          "Most of all, I saw that in high-stakes domains, earning user trust isn't a final polish — it's the design constraint that shapes every flow.",
-        ],
-      },
-    ],
-  },
-  {
-    index: "03",
-    slug: "help-center-mobile-redesign",
-    title: "Redesign Help Center Mobile Experience",
-    period: "2024",
-    summary:
-      "Reworking PNC's in-app Help Center — used by 10M monthly visitors — so users can find branches and request callbacks without friction.",
-    image: "/projects/Help%20Center%20Mobile%20ExperienceThumbnail.jpg",
-    imageAlt: "PNC Help Center mobile screens",
-    href: "/work/help-center-mobile-redesign",
-    meta: {
-      role: "UX/UI Design",
-      team: "1 PM · 4 front-end engineers · 1 UX researcher",
-      timeline: "1 month design timeline",
-    },
-    hero: {
-      src: "/projects/help-storefront.jpg",
-      alt: "PNC Bank branch storefront",
-    },
-    caseStudy: [
-      {
-        heading: "Overview",
-        body: [
-          "PNC is a top-ten bank in the US, and 10 million people visit the app monthly. The in-app Help Center is where many of them turn when something goes wrong — but the experience made getting help harder than it should be.",
-          "The goal: redesign the Help Center mobile experience so people can reliably find a branch and request a callback.",
-        ],
-      },
-      {
-        heading: "The problem",
-        body: [
-          "Two failures showed up again and again: users couldn't easily find a branch, and users couldn't request a callback. Location details were buried because the locator's features were hidden and scattered across the screen.",
-        ],
-      },
-      {
-        heading: "The cost of friction",
-        body: [
-          "PNC user satisfaction sat at 5.4/10, with an NPS of 6.0 for the locator and 6.5 for 'Request a Call.' Only 60% of users successfully found location details, and 56% succeeded at requesting a call.",
-          "Left unaddressed, real-person call-support costs were projected to rise 27% in 2025 as frustrated customers quietly stopped engaging with their PNC accounts.",
-        ],
-        image: {
-          src: "/projects/help-metrics.jpg",
-          alt: "Baseline satisfaction and NPS metrics for the Help Center",
-          caption: "The baseline: low satisfaction and NPS across key tasks.",
-        },
-      },
-      {
-        heading: "Listening to users",
-        body: [
-          "In interviews, the confusion was vivid. “So I just kept tapping on different colorful icons to see if they would take me somewhere,” one participant told us. Another assumed the edit-filter control was for filtering an address rather than refining locator results.",
-          "These moments confirmed the core issue wasn't missing features — it was discoverability. People couldn't tell what was tappable or where it would lead.",
-        ],
-        image: {
-          src: "/projects/help-interviews.jpg",
-          alt: "Remote user interview sessions",
-          caption: "User interviews surfaced repeated discoverability breakdowns.",
-        },
-      },
-      {
-        heading: "The redesign",
-        body: [
-          "I restructured the locator and 'Request a Call' flows so the primary actions are obvious and consistently placed, replacing scattered colorful icons with a clear hierarchy that guides users to branch details and callback requests in fewer taps.",
         ],
       },
     ],
