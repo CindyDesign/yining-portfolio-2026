@@ -121,11 +121,11 @@ export const projects: Project[] = [
     ],
   },
   {
-    index: "Q3 2025 - Q4 2025",
+    index: "Q3 - Q4",
     slug: "genesis-medtech-video-platform",
     title:
       "Building a 0-to-1 Video Uploading and Editing Platform for Genesis MedTech",
-    period: "",
+    period: "2025",
     summary:
       "A labor-saving tool that lets doctors upload and edit surgical videos — designed 0-to-1 with a small cross-functional team.",
     image: "/projects/GenesisThumania.jpg",
