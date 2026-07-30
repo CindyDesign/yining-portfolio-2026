@@ -121,20 +121,26 @@ function Panels({ images, alt }: { images: Block["images"]; alt: string }) {
   if (!images?.length) return null;
   return (
     <div className="flex flex-col gap-6">
-      {images.map((im, i) => (
-        <Image
-          key={im.src}
-          src={im.src}
-          alt={images.length > 1 ? `${alt} (${i + 1} of ${images.length})` : alt}
-          width={im.w}
-          height={im.h}
-          sizes="(max-width: 768px) 100vw, 624px"
-          // The image optimizer flattens animated GIFs to their first frame.
-          // Serving them unoptimized is what keeps the animation alive.
-          unoptimized={im.src.toLowerCase().endsWith(".gif")}
-          className="h-auto w-full"
-        />
-      ))}
+      {images.map((im, i) => {
+        // Figma panel renders arrive with the grey panel and its 48px corner
+        // radius already baked in. Screen-recorded GIFs are square-cornered,
+        // so they get the same radius applied in CSS instead.
+        const isGif = im.src.toLowerCase().endsWith(".gif");
+        return (
+          <Image
+            key={im.src}
+            src={im.src}
+            alt={images.length > 1 ? `${alt} (${i + 1} of ${images.length})` : alt}
+            width={im.w}
+            height={im.h}
+            sizes="(max-width: 768px) 100vw, 624px"
+            // The image optimizer flattens animated GIFs to their first frame.
+            // Serving them unoptimized is what keeps the animation alive.
+            unoptimized={isGif}
+            className={`h-auto w-full${isGif ? " rounded-panel-lg" : ""}`}
+          />
+        );
+      })}
     </div>
   );
 }
