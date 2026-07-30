@@ -15,7 +15,11 @@ const config: Config = {
           hairline: "#475467",
         },
         accent: "#bc532b",
-        line: "#d8d5cc",
+        line: {
+          DEFAULT: "#d8d5cc",
+          // Figma color/grey/200 — hairline border on stat cards
+          soft: "#eaecf0",
+        },
         // Figma color/grey/100 — thumbnail panel behind project images
         surface: "#f2f4f7",
       },
@@ -24,6 +28,8 @@ const config: Config = {
         panel: "32px",
         // Figma corner radius/48 — case-study image panels
         "panel-lg": "48px",
+        // Figma corner radius/16 — stat cards
+        card: "16px",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

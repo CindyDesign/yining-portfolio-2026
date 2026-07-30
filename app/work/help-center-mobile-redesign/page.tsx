@@ -50,11 +50,26 @@ const SOLUTIONS: Block[] = [
   },
 ];
 
+// Order and titles follow Figma 145:5754. "(detractor range)" is deliberately
+// left off the completion-rate card: it describes NPS, and is used correctly on
+// the NPS card below.
 const PROBLEM_STATS = [
-  "Locator flow success completion rate is only 60%; Request a Call success completion rate is 56%",
-  "Locator NPS: 6/10; Request a Call NPS: 6.5/10 (detractor range)",
-  "Help Center Customer Satisfaction Score: 5.4/10 (below the 7.5 target)",
-  "Projected 27% increase in live support costs by Q4 2025 if left unaddressed",
+  {
+    title: "Low Completion Rate",
+    body: "Locator flow completion rate is only 60%; Request a Call completion rate is 56%",
+  },
+  {
+    title: "Risk of increasing cost",
+    body: "Projected 27% increase in live support costs by Q4 2025 if left unaddressed",
+  },
+  {
+    title: "5.4/10 Satisfaction",
+    body: "Help Center Customer Satisfaction Score: 5.4/10 (below the 7.5 target)",
+  },
+  {
+    title: "Low NPS",
+    body: "Locator NPS: 6/10; Request a Call NPS: 6.5/10 (detractor range)",
+  },
 ];
 
 const OUTCOMES = [
@@ -245,16 +260,17 @@ export default function HelpCenterCaseStudy() {
         <SectionHeading id="problem">The Problem</SectionHeading>
         <p className="max-w-3xl leading-relaxed text-ink-muted">
           App reviews and call center data showed users struggling to find branch details
-          or request a callback, driving up live support costs and satisfaction scores.
-          The numbers made the stakes clear:
+          or request a callback, driving live support costs up and satisfaction scores
+          down. The numbers made the stakes clear:
         </p>
-        <ul className="grid gap-4 sm:grid-cols-2">
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {PROBLEM_STATS.map((stat) => (
             <li
-              key={stat}
-              className="rounded-panel bg-surface p-6 leading-relaxed text-ink-muted"
+              key={stat.title}
+              className="flex flex-col gap-2 rounded-card border border-line-soft bg-bg p-6"
             >
-              {stat}
+              <h3 className="text-lg font-medium leading-6 text-ink">{stat.title}</h3>
+              <p className="leading-relaxed text-ink-muted">{stat.body}</p>
             </li>
           ))}
         </ul>
