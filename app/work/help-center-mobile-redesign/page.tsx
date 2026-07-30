@@ -46,7 +46,7 @@ const SOLUTIONS: Block[] = [
   {
     title: "Request a Call flow",
     body: "A Request a Call flow restructured to route all account types (not just personal banking) to the correct helpline, with simplified language and clearer page hierarchy.",
-    images: [img("/projects/hc-request-a-call.jpg", 624, 774)],
+    images: [img("/projects/RequestACall.gif", 1872, 2156)],
   },
 ];
 
