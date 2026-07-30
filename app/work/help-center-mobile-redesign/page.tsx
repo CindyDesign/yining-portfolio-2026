@@ -41,7 +41,7 @@ const SOLUTIONS: Block[] = [
   {
     title: "Locator",
     body: "A Locator with accessible, distinct icons replacing ambiguous color-only differentiation, breadcrumbs for orientation, and filters repositioned for lower cognitive load",
-    images: [img("/projects/hc-locator.jpg", 624, 774)],
+    images: [img("/projects/Locator1.gif", 1872, 2156)],
   },
   {
     title: "Request a Call flow",
@@ -83,7 +83,7 @@ const PROCESS: Block[] = [
     body: "Users assumed colorful icons were interactive, then abandoned the flow when they weren't. Our decision was to replace the old icons with accessible pictorial + word-mark icons, validated with the accessibility team.",
     images: [
       img("/projects/hc-icons-1.jpg", 624, 774),
-      img("/projects/Locator.gif", 1872, 2156),
+      img("/projects/hc-icons-2.jpg", 624, 774),
     ],
   },
   {
