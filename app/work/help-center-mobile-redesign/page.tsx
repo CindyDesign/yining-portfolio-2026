@@ -83,7 +83,7 @@ const PROCESS: Block[] = [
     body: "Users assumed colorful icons were interactive, then abandoned the flow when they weren't. Our decision was to replace the old icons with accessible pictorial + word-mark icons, validated with the accessibility team.",
     images: [
       img("/projects/hc-icons-1.jpg", 624, 774),
-      img("/projects/hc-icons-2.jpg", 624, 774),
+      img("/projects/Locator.gif", 1872, 2156),
     ],
   },
   {
@@ -129,6 +129,9 @@ function Panels({ images, alt }: { images: Block["images"]; alt: string }) {
           width={im.w}
           height={im.h}
           sizes="(max-width: 768px) 100vw, 624px"
+          // The image optimizer flattens animated GIFs to their first frame.
+          // Serving them unoptimized is what keeps the animation alive.
+          unoptimized={im.src.toLowerCase().endsWith(".gif")}
           className="h-auto w-full"
         />
       ))}
