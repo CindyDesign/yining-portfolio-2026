@@ -97,7 +97,7 @@ const PROCESS: Block[] = [
     title: "Icons lead to confusion",
     body: "Users assumed colorful icons were interactive, then abandoned the flow when they weren't. Our decision was to replace the old icons with accessible pictorial + word-mark icons, validated with the accessibility team.",
     images: [
-      img("/projects/hc-icons-1.jpg", 624, 774),
+      img("/projects/LoctorNotWorking.gif", 1872, 2156),
       img("/projects/Locator2.gif", 1872, 2156),
     ],
   },
