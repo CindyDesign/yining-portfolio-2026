@@ -342,8 +342,8 @@ export default function HelpCenterCaseStudy() {
         <Image
           src="/projects/hc-interviews.jpg"
           alt="User interview observations and quotes grouped into themes"
-          width={1152}
-          height={721}
+          width={2304}
+          height={1442}
           sizes="(max-width: 1200px) 100vw, 1152px"
           className="mt-2 h-auto w-full"
         />
