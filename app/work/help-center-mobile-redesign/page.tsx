@@ -339,6 +339,14 @@ export default function HelpCenterCaseStudy() {
           location details or request a callback. I compiled key observations and user
           quotes into thematic groups, with two recurring sentiments emerging.
         </p>
+        <Image
+          src="/projects/hc-interviews.jpg"
+          alt="User interview observations and quotes grouped into themes"
+          width={1152}
+          height={721}
+          sizes="(max-width: 1200px) 100vw, 1152px"
+          className="mt-2 h-auto w-full"
+        />
         {PROCESS.map((p) => (
           <SplitBlock key={p.title} {...p} />
         ))}
