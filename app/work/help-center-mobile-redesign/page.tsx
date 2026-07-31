@@ -31,6 +31,8 @@ const NAV = [
 
 type Block = {
   title: string;
+  /** Optional label between the heading and the body (Figma 154:5999) */
+  subtitle?: string;
   body: string;
   images?: { src: string; w: number; h: number }[];
 };
@@ -106,7 +108,11 @@ const OUTCOMES = [
 
 const PROCESS: Block[] = [
   {
-    title: "Icons lead to confusion",
+    // Figma 72:20152. Source reads "...due to locator features were hidden and
+    // scattered", which is ungrammatical; "because ... were" keeps the meaning.
+    title:
+      "Challenge one: Users struggled to access the location details page because locator features were hidden and scattered",
+    subtitle: "Icons lead to confusion",
     body: "Users assumed colorful icons were interactive, then abandoned the flow when they weren't. Our decision was to replace the old icons with accessible pictorial + word-mark icons, validated with the accessibility team.",
     images: [
       img("/projects/LoctorNotWorking.gif", 1872, 2156),
@@ -180,7 +186,7 @@ function SectionHeading({ id, children }: { id: string; children: React.ReactNod
   );
 }
 
-function SplitBlock({ title, body, images }: Block) {
+function SplitBlock({ title, subtitle, body, images }: Block) {
   const hasImages = Boolean(images?.length);
   return (
     <div
@@ -192,6 +198,9 @@ function SplitBlock({ title, body, images }: Block) {
     >
       <div className="flex flex-col gap-2 pt-3">
         <h3 className="text-lg font-medium leading-6 text-ink">{title}</h3>
+        {subtitle && (
+          <p className="leading-6 text-ink-hairline">{subtitle}</p>
+        )}
         <p className="max-w-3xl leading-relaxed text-ink-muted">{body}</p>
       </div>
       <Panels images={images} alt={title} />
