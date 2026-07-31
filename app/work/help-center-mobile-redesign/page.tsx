@@ -68,23 +68,39 @@ const PROBLEM_STATS = [
   },
 ];
 
+/**
+ * Figma 152:5971 replaces the old bullet lists + stat images with two rows of
+ * three metric tiles. Two corrections against that source, both noted for
+ * review:
+ *  - The Request a Call NPS tile reads 8.0 but its caption said "6 to 7.5",
+ *    contradicting its own figure; caption corrected to "6 to 8", which matches
+ *    the previously published copy.
+ *  - "Out perform goal" -> "Outperforms goal".
+ */
 const OUTCOMES = [
   {
     title: "Locator Flow",
-    results: [
-      "Locator task success: 60% → 89%",
-      "NPS improved from 6 to 7.5",
-      "Users now reach location details in under 1 second",
+    metrics: [
+      { figure: "89%", label: "Task completion", note: "Outperforms goal" },
+      {
+        figure: "1s",
+        label: "Reach location detail",
+        note: "Users now reach location details in under 1 second",
+      },
+      { figure: "7.5", label: "NPS Score", note: "NPS improved from 6 to 7.5" },
     ],
-    images: [img("/projects/hc-outcomes-locator.jpg", 624, 340)],
   },
   {
     title: "Request a Call Flow",
-    results: [
-      "Request a Call task success: 56% → 88%",
-      "NPS improved from 6 to 8",
+    metrics: [
+      { figure: "89%", label: "Task completion", note: "Outperforms goal" },
+      {
+        figure: "13%",
+        label: "Reduced cost",
+        note: "Users self-serve in the app",
+      },
+      { figure: "8.0", label: "NPS Score", note: "NPS improved from 6 to 8" },
     ],
-    images: [img("/projects/hc-outcomes-call.jpg", 624, 340)],
   },
 ];
 
@@ -283,24 +299,35 @@ export default function HelpCenterCaseStudy() {
       {/* Outcomes & Impact */}
       <section className="mt-11 flex flex-col gap-6">
         <SectionHeading id="outcomes">Outcomes &amp; Impact</SectionHeading>
-        {OUTCOMES.map((o) => (
-          <div
-            key={o.title}
-            className="grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32"
-          >
-            <div className="flex flex-col gap-2 pt-3">
-              <h3 className="text-lg font-medium leading-6 text-ink">{o.title}</h3>
-              <ul className="mt-1 space-y-2">
-                {o.results.map((r) => (
-                  <li key={r} className="leading-relaxed text-ink-muted">
-                    {r}
+        <div className="flex flex-col gap-16">
+          {OUTCOMES.map((group) => (
+            <div key={group.title} className="flex flex-col gap-8">
+              <h3 className="text-lg font-medium leading-6 text-ink">{group.title}</h3>
+              <ul className="grid gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                {group.metrics.map((m, i) => (
+                  <li
+                    key={m.label}
+                    className={`flex items-center gap-6 px-0 py-2 lg:px-6 ${
+                      i < group.metrics.length - 1
+                        ? "lg:border-r lg:border-line-soft"
+                        : ""
+                    }`}
+                  >
+                    <span className="shrink-0 text-5xl font-light tracking-[-1.32px] text-ink-stat sm:text-[66px] sm:leading-[71.28px]">
+                      {m.figure}
+                    </span>
+                    <span className="flex flex-col gap-[11px]">
+                      <span className="text-lg font-medium leading-6 text-ink-stat">
+                        {m.label}
+                      </span>
+                      <span className="leading-relaxed text-ink-muted">{m.note}</span>
+                    </span>
                   </li>
                 ))}
               </ul>
             </div>
-            <Panels images={o.images} alt={o.title} />
-          </div>
-        ))}
+          ))}
+        </div>
       </section>
 
       {/* Design & Research Process */}

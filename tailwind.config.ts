@@ -13,6 +13,8 @@ const config: Config = {
           strong: "#101828",
           // Figma color/grey/600 — pill badge borders
           hairline: "#475467",
+          // Figma Gray (light mode)/800 — outcome stat figures and labels
+          stat: "#182230",
         },
         accent: "#bc532b",
         line: {
