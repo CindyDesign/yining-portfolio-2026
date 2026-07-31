@@ -63,10 +63,6 @@ const PROBLEM_STATS = [
     body: "Projected 27% increase in live support costs by Q4 2025 if left unaddressed",
   },
   {
-    title: "5.4/10 Satisfaction",
-    body: "Help Center Customer Satisfaction Score: 5.4/10 (below the 7.5 target)",
-  },
-  {
     title: "Low NPS",
     body: "Locator NPS: 6/10; Request a Call NPS: 6.5/10 (detractor range)",
   },
@@ -263,7 +259,7 @@ export default function HelpCenterCaseStudy() {
           or request a callback, driving live support costs up and satisfaction scores
           down. The numbers made the stakes clear:
         </p>
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PROBLEM_STATS.map((stat) => (
             <li
               key={stat.title}
