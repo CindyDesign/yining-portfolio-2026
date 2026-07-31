@@ -134,6 +134,8 @@ const PROCESS: Block[] = [
   {
     title: "6 Minutes Saved",
     body: "Users can now be routed to the right helpline, which saves them an average of 6 minutes.",
+    // Figma 73:19913 ("image 111"). Raw asset is 2x the 624x773 canvas frame.
+    images: [img("/projects/hc-routing.jpg", 1248, 1547)],
   },
   {
     title: "Building visual consistency and clear content",
