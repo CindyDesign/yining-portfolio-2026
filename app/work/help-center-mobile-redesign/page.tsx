@@ -35,6 +35,12 @@ type Block = {
   subtitle?: string;
   body: string;
   images?: { src: string; w: number; h: number }[];
+  /**
+   * "split" (default) puts the image in a right-hand column beside the text.
+   * "stacked" runs the text full width with the image below it, matching the
+   * 1152-wide panels in Figma.
+   */
+  layout?: "split" | "stacked";
 };
 
 const img = (src: string, w: number, h: number) => ({ src, w, h });
@@ -128,8 +134,14 @@ const PROCESS: Block[] = [
     ],
   },
   {
-    title: "Enhancing the request a call work flow",
-    body: "Knowing the flow worked for supported accounts, but failed for 46% of users, I worked with Product Owner Frank and developer Divya to inventory unsupported accounts and their specific phone numbers",
+    // Figma 157:5633
+    title:
+      "Challenge Two: The 'Request a Call' flow only supported personal banking accounts, with ambiguous labels and poorly structured pages that confused users.",
+    subtitle: "Enhancing the request a call work flow",
+    body: "Knowing the flow worked for supported accounts, but failed for 46% of users, I worked with Product Owner Frank and developer Divya to inventory unsupported accounts and their specific phone numbers.",
+    // Figma 73:19902 ("image 112") is 1152 wide — full width, not a side panel.
+    images: [img("/projects/hc-account-inventory.jpg", 2304, 882)],
+    layout: "stacked",
   },
   {
     title: "6 Minutes Saved",
@@ -152,7 +164,16 @@ const PROCESS: Block[] = [
   },
 ];
 
-function Panels({ images, alt }: { images: Block["images"]; alt: string }) {
+function Panels({
+  images,
+  alt,
+  full = false,
+}: {
+  images: Block["images"];
+  alt: string;
+  /** Full-bleed images occupy the 1152 content width, not the 624 side column. */
+  full?: boolean;
+}) {
   if (!images?.length) return null;
   return (
     <div className="flex flex-col gap-6">
@@ -168,7 +189,9 @@ function Panels({ images, alt }: { images: Block["images"]; alt: string }) {
             alt={images.length > 1 ? `${alt} (${i + 1} of ${images.length})` : alt}
             width={im.w}
             height={im.h}
-            sizes="(max-width: 768px) 100vw, 624px"
+            sizes={
+              full ? "(max-width: 1200px) 100vw, 1152px" : "(max-width: 768px) 100vw, 624px"
+            }
             // The image optimizer flattens animated GIFs to their first frame.
             // Serving them unoptimized is what keeps the animation alive.
             unoptimized={isGif}
@@ -188,14 +211,15 @@ function SectionHeading({ id, children }: { id: string; children: React.ReactNod
   );
 }
 
-function SplitBlock({ title, subtitle, body, images }: Block) {
+function SplitBlock({ title, subtitle, body, images, layout = "split" }: Block) {
   const hasImages = Boolean(images?.length);
+  const isSplit = hasImages && layout === "split";
   return (
     <div
       className={
-        hasImages
+        isSplit
           ? "grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32"
-          : "py-6"
+          : "flex flex-col gap-6 py-6"
       }
     >
       <div className="flex flex-col gap-2 pt-3">
@@ -205,7 +229,7 @@ function SplitBlock({ title, subtitle, body, images }: Block) {
         )}
         <p className="max-w-3xl leading-relaxed text-ink-muted">{body}</p>
       </div>
-      <Panels images={images} alt={title} />
+      <Panels images={images} alt={title} full={!isSplit} />
     </div>
   );
 }
