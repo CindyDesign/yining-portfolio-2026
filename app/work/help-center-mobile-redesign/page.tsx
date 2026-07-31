@@ -29,12 +29,24 @@ const NAV = [
   { label: "Lesson Learned", href: "#lessons" },
 ];
 
+type PanelImage = {
+  src: string;
+  w: number;
+  h: number;
+  /**
+   * Figma wraps some images in a grey `Background` frame (#f2f4f7, 64px pad,
+   * 48px radius). Recreating that in CSS lets the image itself ship at 2x —
+   * rendering the composed frame instead would cap it at 1x canvas size.
+   */
+  panel?: boolean;
+};
+
 type Block = {
   title: string;
   /** Optional label between the heading and the body (Figma 154:5999) */
   subtitle?: string;
   body: string;
-  images?: { src: string; w: number; h: number }[];
+  images?: PanelImage[];
   /**
    * "split" (default) puts the image in a right-hand column beside the text.
    * "stacked" runs the text full width with the image below it, matching the
@@ -43,7 +55,12 @@ type Block = {
   layout?: "split" | "stacked";
 };
 
-const img = (src: string, w: number, h: number) => ({ src, w, h });
+const img = (src: string, w: number, h: number, panel = false): PanelImage => ({
+  src,
+  w,
+  h,
+  panel,
+});
 
 const SOLUTIONS: Block[] = [
   {
@@ -152,15 +169,22 @@ const PROCESS: Block[] = [
   {
     title: "Building visual consistency and clear content",
     body: "Besides, looking at the overall experience, the flow had redundant, unclear content and confusing grouping of information, so I partnered with content designer Jenny to simplify language, unify content standards, and ensure users clearly understand each button and choice.",
+    // Figma 73:22672 ("image 117") is 1152 wide — full width below the text.
+    images: [img("/projects/hc-content-standards.jpg", 2304, 618)],
+    layout: "stacked",
   },
   {
     title: "Restructuring for Clarity",
     body: "Since Help Center features are self-explanatory, we removed redundant top text and subtext to keep focus on the main message. For the sake of time, not going to mention some other feature level changes on this page.",
-    images: [img("/projects/hc-clarity.jpg", 1152, 780)],
+    // Figma 73:38198 ("image 119") inside Background 71:19619 — grey panel in CSS.
+    images: [img("/projects/hc-clarity.jpg", 2304, 1560, true)],
+    layout: "stacked",
   },
   {
     title: "Aligning IA with how users actually think.",
     body: "Additionally, we restructured the page IA by moving generic inquiry selection to a secondary action, aligning with users' mental models, clarifying progress, and reducing uncertainty.",
+    // Figma 73:38214 ("image 111") — 624 wide, side column.
+    images: [img("/projects/hc-ia.jpg", 1248, 1547)],
   },
 ];
 
@@ -182,7 +206,7 @@ function Panels({
         // radius already baked in. Screen-recorded GIFs are square-cornered,
         // so they get the same radius applied in CSS instead.
         const isGif = im.src.toLowerCase().endsWith(".gif");
-        return (
+        const picture = (
           <Image
             key={im.src}
             src={im.src}
@@ -195,8 +219,18 @@ function Panels({
             // The image optimizer flattens animated GIFs to their first frame.
             // Serving them unoptimized is what keeps the animation alive.
             unoptimized={isGif}
-            className={`h-auto w-full${isGif ? " rounded-panel-lg" : ""}`}
+            className={`h-auto w-full${isGif && !im.panel ? " rounded-panel-lg" : ""}`}
           />
+        );
+        return im.panel ? (
+          <div
+            key={im.src}
+            className="flex items-center justify-center rounded-panel-lg bg-surface p-6 sm:p-16"
+          >
+            {picture}
+          </div>
+        ) : (
+          picture
         );
       })}
     </div>
