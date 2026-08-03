@@ -329,7 +329,7 @@ export default function HelpCenterCaseStudy() {
       </header>
 
       {/* Key Solution */}
-      <section className="mt-11 flex flex-col gap-6">
+      <section className="mt-32 flex flex-col gap-6">
         <SectionHeading id="solution">Key Solution</SectionHeading>
         {SOLUTIONS.map((s) => (
           <SplitBlock key={s.title} {...s} />
@@ -337,7 +337,7 @@ export default function HelpCenterCaseStudy() {
       </section>
 
       {/* The Problem */}
-      <section className="mt-11 flex flex-col gap-6">
+      <section className="mt-32 flex flex-col gap-6">
         <SectionHeading id="problem">The Problem</SectionHeading>
         <p className="max-w-3xl leading-relaxed text-ink-muted">
           App reviews and call center data showed users struggling to find branch details
@@ -366,7 +366,7 @@ export default function HelpCenterCaseStudy() {
       </section>
 
       {/* Outcomes & Impact */}
-      <section className="mt-11 flex flex-col gap-6">
+      <section className="mt-32 flex flex-col gap-6">
         <SectionHeading id="outcomes">Outcomes &amp; Impact</SectionHeading>
         <div className="flex flex-col gap-16">
           {OUTCOMES.map((group) => (
@@ -400,7 +400,7 @@ export default function HelpCenterCaseStudy() {
       </section>
 
       {/* Design & Research Process */}
-      <section className="mt-11 flex flex-col gap-6">
+      <section className="mt-32 flex flex-col gap-6">
         <SectionHeading id="process">Design &amp; Research Process</SectionHeading>
         <p className="max-w-3xl leading-relaxed text-ink-muted">
           During user interview sessions, I partnered with Product Manager Frank and
@@ -422,7 +422,7 @@ export default function HelpCenterCaseStudy() {
       </section>
 
       {/* Other Contribution */}
-      <section className="mt-11 flex flex-col gap-6">
+      <section className="mt-32 flex flex-col gap-6">
         <SectionHeading id="other">Other Contribution</SectionHeading>
         <SplitBlock
           title="Accessibility as a lasting standard, not a checkbox."
@@ -432,7 +432,7 @@ export default function HelpCenterCaseStudy() {
       </section>
 
       {/* Lessons Learned */}
-      <section className="mt-11 flex flex-col gap-4 pb-12">
+      <section className="mt-32 flex flex-col gap-4 pb-12">
         <SectionHeading id="lessons">Lessons Learned / Next Steps</SectionHeading>
         <p className="max-w-3xl leading-relaxed text-ink-muted">
           Support is foundational to how users feel about their bank, especially when
