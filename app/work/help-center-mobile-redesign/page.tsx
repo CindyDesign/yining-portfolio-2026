@@ -176,8 +176,11 @@ const PROCESS: Block[] = [
   {
     title: "Restructuring for Clarity",
     body: "Since Help Center features are self-explanatory, we removed redundant top text and subtext to keep focus on the main message. For the sake of time, not going to mention some other feature level changes on this page.",
-    // Figma 73:38198 ("image 119") inside Background 71:19619 — grey panel in CSS.
-    images: [img("/projects/hc-clarity.jpg", 2304, 1560, true)],
+    // Figma 73:38198 ("image 119") already carries the #f2f4f7 field, and in
+    // Figma it fills Background 71:19619 edge to edge — the container's nominal
+    // 64px padding is overridden by the fixed-size child. Wrapping it in a CSS
+    // panel would inset it twice and shrink the screens, so it renders bare.
+    images: [img("/projects/hc-clarity.png", 2304, 1560)],
     layout: "stacked",
   },
   {
@@ -202,9 +205,9 @@ function Panels({
   return (
     <div className="flex flex-col gap-6">
       {images.map((im, i) => {
-        // Figma panel renders arrive with the grey panel and its 48px corner
-        // radius already baked in. Screen-recorded GIFs are square-cornered,
-        // so they get the same radius applied in CSS instead.
+        // Anything not wrapped in a CSS panel carries the 48px radius itself.
+        // Whole-panel renders already have it baked in, so re-applying the same
+        // value is a no-op; GIFs and bare inner images genuinely need it.
         const isGif = im.src.toLowerCase().endsWith(".gif");
         const picture = (
           <Image
@@ -219,7 +222,7 @@ function Panels({
             // The image optimizer flattens animated GIFs to their first frame.
             // Serving them unoptimized is what keeps the animation alive.
             unoptimized={isGif}
-            className={`h-auto w-full${isGif && !im.panel ? " rounded-panel-lg" : ""}`}
+            className={`h-auto w-full${im.panel ? "" : " rounded-panel-lg"}`}
           />
         );
         return im.panel ? (
