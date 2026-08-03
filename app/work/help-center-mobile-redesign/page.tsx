@@ -146,8 +146,8 @@ const PROCESS: Block[] = [
     title: "Duo entry points lead to confusion",
     body: "Users felt overwhelmed by dual interactions on the small search bar and often experienced fat-fingering issues, which, as confirmed by PNC's accessibility coach, also failed to meet the bank's WCAG triple A standard. To reduce interaction and cognitive load, I separated the filters from the search bar. After exploring placement options and accounting for top notifications, I positioned the filters at the bottom.",
     images: [
-      img("/projects/hc-filters-1.jpg", 624, 774),
-      img("/projects/hc-filters-2.jpg", 624, 774),
+      img("/projects/hc-filters-1.png", 624, 774),
+      img("/projects/hc-filters-2.png", 624, 774),
     ],
   },
   {
@@ -427,7 +427,7 @@ export default function HelpCenterCaseStudy() {
         <SplitBlock
           title="Accessibility as a lasting standard, not a checkbox."
           body="Collaborated with PNC's accessibility coach to bring the Locator and icon system up to WCAG AAA standards — work that later informed accessibility practices beyond this project."
-          images={[img("/projects/hc-accessibility.jpg", 624, 275)]}
+          images={[img("/projects/hc-accessibility.png", 624, 275)]}
         />
       </section>
 
