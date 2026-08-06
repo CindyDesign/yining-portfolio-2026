@@ -358,14 +358,14 @@ export default function HelpCenterCaseStudy() {
             </li>
           ))}
         </ul>
-        {/* Figma 168:5617 ("image 123") centred in Pen 72:19922. Composited onto
-            the #f2f4f7 field at 2x — the source asset is 2940px wide, so this is
-            a downscale, not an upscale. */}
+        {/* Figma 174:5636 ("image 126"), which carries the #f2f4f7 field itself —
+            the grey Pen wrapper is gone from the design. Downscaled from a
+            3456px source to 2x, and the alpha flattened onto the same grey. */}
         <Image
           src="/projects/hc-problem.png"
-          alt="PNC Help Center, Call PNC and Locator screens showing the paths users take to get help"
+          alt="PNC Help Center screen with arrows tracing two paths: Request a Call to the Call PNC screen, and Locate PNC to the Locator map"
           width={2304}
-          height={1440}
+          height={1560}
           sizes="(max-width: 1200px) 100vw, 1152px"
           className="mt-2 h-auto w-full rounded-panel"
         />
