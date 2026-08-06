@@ -358,13 +358,16 @@ export default function HelpCenterCaseStudy() {
             </li>
           ))}
         </ul>
+        {/* Figma 168:5617 ("image 123") centred in Pen 72:19922. Composited onto
+            the #f2f4f7 field at 2x — the source asset is 2940px wide, so this is
+            a downscale, not an upscale. */}
         <Image
-          src="/projects/hc-research.jpg"
-          alt="Research synthesis from app reviews and call centre data"
-          width={1152}
-          height={720}
+          src="/projects/hc-problem.png"
+          alt="PNC Help Center, Call PNC and Locator screens showing the paths users take to get help"
+          width={2304}
+          height={1440}
           sizes="(max-width: 1200px) 100vw, 1152px"
-          className="mt-2 h-auto w-full"
+          className="mt-2 h-auto w-full rounded-panel"
         />
       </section>
 

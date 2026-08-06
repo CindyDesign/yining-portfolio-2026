@@ -56,7 +56,7 @@ const OUTCOMES = [
       "Reduce video-editing time by 15%",
       "AI efficiency in both uploading and editing",
     ],
-    images: [img("/projects/gen-outcomes-surgeons.jpg", 624, 340)],
+    images: [img("/projects/gen-outcomes-surgeons.png", 752, 468)],
   },
   {
     lead: "For Genesis MedTech, the product achieved the goals:",
@@ -65,7 +65,7 @@ const OUTCOMES = [
       "68% editing retention at MVP",
       "AI error rates (auto-fill) held under 20%",
     ],
-    images: [img("/projects/gen-outcomes-company.jpg", 624, 340)],
+    images: [img("/projects/gen-outcomes-company.png", 752, 468)],
   },
 ];
 
@@ -78,8 +78,8 @@ const PROCESS: Block[] = [
     title: "Stepped input, driven by user confidence",
     body: "Research showed surgeons don't mind manual data entry — they mind re-entering data that already lives in hospital systems. Testing a 3-step form against a single-screen form, users preferred the stepped version because breaking up the task built confidence. This insight also shaped our push to auto-populate post-surgery data from partner hospitals (10+ onboarded so far).",
     images: [
-      img("/projects/gen-stepped-1.jpg", 624, 624),
-      img("/projects/gen-stepped-2.jpg", 624, 624),
+      img("/projects/gen-stepped-1.png", 752, 752),
+      img("/projects/gen-stepped-2.png", 752, 752),
     ],
   },
   {
@@ -94,19 +94,19 @@ const PROCESS: Block[] = [
     title: "Sensitive-clip UI — clarity over alarm",
     body: "For AI-flagged sensitive frames, I tested a cautionary orange treatment against a neutral, on-brand blue with plain-language copy. Surgeons — being highly educated and prone to over-reading UI — strongly preferred the calmer version, which scored significantly higher. We paired this with a “confirm deletions” pattern (over grayed-out restores) that users found clearer and more controllable.",
     images: [
-      img("/projects/gen-sensitive-1.jpg", 624, 624),
-      img("/projects/gen-sensitive-2.jpg", 624, 624),
+      img("/projects/gen-sensitive-1.png", 624, 624),
+      img("/projects/gen-sensitive-2.png", 624, 624),
     ],
   },
   {
     title: "Usability testing on the AI editing feature",
     body: "We designed quick-access entry points for common editing tools. We conducted mid-fidelity usability testing to ensure users could easily find and use each editing feature. All key tools met user expectations.",
-    images: [img("/projects/gen-usability.jpg", 1152, 774)],
+    images: [img("/projects/gen-usability.png", 1152, 774)],
   },
   {
     title: "Scoping with trade-offs",
     body: "Using an NN/g-based trade-off framework weighing user value against budget and timeline, the team scored features through structured voting. The Pen Tool ranked lowest (7.5) — still “desired,” but deferred from the 2025 roadmap to protect MVP focus.",
-    images: [img("/projects/gen-tradeoffs.jpg", 1152, 774)],
+    images: [img("/projects/gen-tradeoffs.png", 1152, 774)],
   },
 ];
 
@@ -114,7 +114,7 @@ const NEXT_STEPS: Block[] = [
   {
     title: "Post-launch: listen, iterate, expand.",
     body: "We collected real feedback from pilot users and realized the model's outputs were basic — but users said ~80% of their surgeries are routine, and they'd still use the AI-generated text as a starting point. We decided to continue refining the AI pre-fill feature and monitor engagement post-release.",
-    images: [img("/projects/gen-next-steps.jpg", 624, 200)],
+    images: [img("/projects/gen-next-steps.png", 624, 200)],
   },
   {
     title: "Validated demand, real integrations underway.",
@@ -248,7 +248,7 @@ export default function GenesisCaseStudy() {
           videos.
         </p>
         <Image
-          src="/projects/gen-problem.jpg"
+          src="/projects/gen-problem.png"
           alt="Limitations of mainstream video platforms for surgical footage"
           width={1152}
           height={720}

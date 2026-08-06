@@ -41,17 +41,17 @@ const SOLUTIONS: Block[] = [
   {
     title: "Instant verification so no wait times",
     body: "Successfully aligned product, engineering, and risk partners to abandon legacy trial deposits, transitioning the platform toward real-time account verification to boost activation velocity and user trust.",
-    images: [img("/projects/et-instant-verify.jpg", 624, 774)],
+    images: [img("/projects/et-instant-verify.png", 624, 774)],
   },
   {
     title: "16 Steps of Verification to 8 Steps",
     body: "Collapsed redundant verification steps by combining trial-deposit confirmation with additional identity verification into a single pass.",
-    images: [img("/projects/et-collapsed-steps.jpg", 624, 774)],
+    images: [img("/projects/et-collapsed-steps.png", 624, 774)],
   },
   {
     title: "Consistent Transfer Interaction Pattern",
     body: "Established one consistent transfer flow from entry point to success screen so the experience felt identical whether a user started from account overview, transfers, or settings.",
-    images: [img("/projects/et-consistent-flow.jpg", 624, 774)],
+    images: [img("/projects/et-consistent-flow.png", 624, 774)],
   },
 ];
 
@@ -104,17 +104,17 @@ const PROCESS: Block[] = [
     // so this block needed a title of its own — written to match its body.
     title: "A single, predictable input order",
     body: "Led a generative card-sorting workshop to restructure the six core transaction fields, converging on a single, high-predictability input order that mirrors user mental models.",
-    images: [img("/projects/et-card-sorting.jpg", 624, 774)],
+    images: [img("/projects/et-card-sorting.png", 624, 774)],
   },
   {
     title: "Consistent entry points, clearer guidance",
     body: "Standardized transfer entry points for a consistent look, added a prominent visual tile for clarity, and included subtext for user guidance.",
-    images: [img("/projects/et-entry-points.jpg", 1152, 774)],
+    images: [img("/projects/et-entry-points.png", 1152, 774)],
   },
   {
     title: "Clear hierarchy, distinct information levels",
     body: "Established a clear visual hierarchy across all pages, ensuring content, containers, and background colors create distinction between different levels of information.",
-    images: [img("/projects/et-hierarchy.jpg", 1152, 774)],
+    images: [img("/projects/et-hierarchy.png", 1152, 774)],
   },
 ];
 
@@ -122,12 +122,12 @@ const OTHER: Block[] = [
   {
     title: "AI-assisted design system building",
     body: "I used AI to systematically stress-test our newly structured transaction fields — generating robust copy and data states for edge cases.",
-    images: [img("/projects/et-ai-fields.jpg", 624, 624)],
+    images: [img("/projects/et-ai-fields.png", 752, 752)],
   },
   {
     title: "QA testing",
     body: "Partnered with engineering to sequence backend verification changes alongside the UI rebuild, ensuring the compressed flow didn't outpace fraud/compliance checks.",
-    images: [img("/projects/et-qa.jpg", 1177, 265)],
+    images: [img("/projects/et-qa.png", 1305, 393)],
   },
 ];
 
@@ -288,7 +288,7 @@ export default function ExternalTransferCaseStudy() {
             ))}
           </div>
           <Image
-            src="/projects/et-outcomes.jpg"
+            src="/projects/et-outcomes.png"
             alt="External transfer outcomes"
             width={624}
             height={624}
