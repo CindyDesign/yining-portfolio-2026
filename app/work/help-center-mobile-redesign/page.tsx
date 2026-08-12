@@ -146,8 +146,8 @@ const PROCESS: Block[] = [
     title: "Duo entry points lead to confusion",
     body: "Users felt overwhelmed by dual interactions on the small search bar and often experienced fat-fingering issues, which, as confirmed by PNC's accessibility coach, also failed to meet the bank's WCAG triple A standard. To reduce interaction and cognitive load, I separated the filters from the search bar. After exploring placement options and accounting for top notifications, I positioned the filters at the bottom.",
     images: [
-      img("/projects/hc-filters-1.png", 624, 774),
-      img("/projects/hc-filters-2.png", 624, 774),
+      img("/projects/hc-filters-1.png", 1248, 1547),
+      img("/projects/hc-filters-2.png", 1248, 1547),
     ],
   },
   {
