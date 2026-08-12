@@ -17,11 +17,10 @@ const config: Config = {
           stat: "#182230",
         },
         accent: "#bc532b",
-        line: {
-          DEFAULT: "#d8d5cc",
-          // Figma color/grey/200 — hairline border on stat cards
-          soft: "#eaecf0",
-        },
+        // Figma color/grey/200 — every divider, rule and hairline border.
+        // Was #d8d5cc, a warm beige from the cream-background era; it read as
+        // out of place once the page went white and the palette went cool.
+        line: "#eaecf0",
         // Figma color/grey/100 — thumbnail panel behind project images
         surface: "#f2f4f7",
       },

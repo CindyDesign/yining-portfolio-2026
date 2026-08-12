@@ -351,7 +351,7 @@ export default function HelpCenterCaseStudy() {
           {PROBLEM_STATS.map((stat) => (
             <li
               key={stat.title}
-              className="flex flex-col gap-2 rounded-card border border-line-soft bg-bg p-6"
+              className="flex flex-col gap-2 rounded-card border border-line bg-bg p-6"
             >
               <h3 className="text-lg font-medium leading-6 text-ink">{stat.title}</h3>
               <p className="leading-relaxed text-ink-muted">{stat.body}</p>
@@ -384,7 +384,7 @@ export default function HelpCenterCaseStudy() {
                     key={m.label}
                     className={`flex items-center gap-6 px-0 py-2 lg:px-6 ${
                       i < group.metrics.length - 1
-                        ? "lg:border-r lg:border-line-soft"
+                        ? "lg:border-r lg:border-line"
                         : ""
                     }`}
                   >
