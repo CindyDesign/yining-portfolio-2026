@@ -433,7 +433,10 @@ export default function HelpCenterCaseStudy() {
         <SplitBlock
           title="Accessibility as a lasting standard, not a checkbox."
           body="Collaborated with PNC's accessibility coach to bring the Locator and icon system up to WCAG AAA standards — work that later informed accessibility practices beyond this project."
-          images={[img("/projects/hc-accessibility.png", 624, 275)]}
+          // Figma 184:5713 ("image 127") at its native 2496x1100 — 4x the placed
+          // size. Kept full-res rather than downscaled: it is mostly flat colour,
+          // so the whole file is under 90KB.
+          images={[img("/projects/hc-accessibility.png", 2496, 1100)]}
         />
       </section>
 
