@@ -41,7 +41,7 @@ const SOLUTIONS: Block[] = [
   {
     title: "Instant verification so no wait times",
     body: "Successfully aligned product, engineering, and risk partners to abandon legacy trial deposits, transitioning the platform toward real-time account verification to boost activation velocity and user trust.",
-    images: [img("/projects/et-instant-verify.png", 624, 774)],
+    images: [img("/projects/Instant%20verification.gif", 1872, 2156)],
   },
   {
     title: "16 Steps of Verification to 8 Steps",
@@ -51,7 +51,7 @@ const SOLUTIONS: Block[] = [
   {
     title: "Consistent Transfer Interaction Pattern",
     body: "Established one consistent transfer flow from entry point to success screen so the experience felt identical whether a user started from account overview, transfers, or settings.",
-    images: [img("/projects/et-consistent-flow.png", 624, 774)],
+    images: [img("/projects/Consistent_Transfer.gif", 1872, 2156)],
   },
 ];
 
@@ -135,17 +135,25 @@ function Panels({ images, alt }: { images: Block["images"]; alt: string }) {
   if (!images?.length) return null;
   return (
     <div className="flex flex-col gap-6">
-      {images.map((im, i) => (
-        <Image
-          key={im.src}
-          src={im.src}
-          alt={images.length > 1 ? `${alt} (${i + 1} of ${images.length})` : alt}
-          width={im.w}
-          height={im.h}
-          sizes="(max-width: 768px) 100vw, 624px"
-          className="h-auto w-full"
-        />
-      ))}
+      {images.map((im, i) => {
+        // The image optimizer flattens an animated GIF to its first frame, so
+        // GIFs are served unoptimized. Panel renders arrive with the 48px
+        // radius baked in; screen recordings are square-cornered and get it
+        // applied here instead.
+        const isGif = im.src.toLowerCase().endsWith(".gif");
+        return (
+          <Image
+            key={im.src}
+            src={im.src}
+            alt={images.length > 1 ? `${alt} (${i + 1} of ${images.length})` : alt}
+            width={im.w}
+            height={im.h}
+            sizes="(max-width: 768px) 100vw, 624px"
+            unoptimized={isGif}
+            className={`h-auto w-full${isGif ? " rounded-panel-lg" : ""}`}
+          />
+        );
+      })}
     </div>
   );
 }
