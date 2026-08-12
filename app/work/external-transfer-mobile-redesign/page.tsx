@@ -8,8 +8,8 @@ import { getProject } from "@/lib/projects";
  * the Figma at node 10:630. Static route, taking precedence over the shared
  * `app/work/[slug]/page.tsx` template.
  *
- * Panel images come from the Figma `Background` nodes and carry the grey panel
- * and 48px radius baked in. Blocks with no visual in the design render as
+ * Panel images come from Figma's raw assets (2–3x), downscaled to 2x and
+ * flattened onto #f2f4f7. Blocks with no visual in the design render as
  * full-width text.
  */
 
@@ -29,13 +29,20 @@ const NAV = [
   { label: "Lesson Learned", href: "#lessons" },
 ];
 
+type PanelImage = { src: string; w: number; h: number };
+
 type Block = {
   title: string;
   body: string;
-  images?: { src: string; w: number; h: number }[];
+  images?: PanelImage[];
+  /**
+   * "split" (default) puts images in a 624-wide column beside the text.
+   * "stacked" runs the text full width with 1152-wide images below it.
+   */
+  layout?: "split" | "stacked";
 };
 
-const img = (src: string, w: number, h: number) => ({ src, w, h });
+const img = (src: string, w: number, h: number): PanelImage => ({ src, w, h });
 
 const SOLUTIONS: Block[] = [
   {
@@ -44,7 +51,7 @@ const SOLUTIONS: Block[] = [
     images: [img("/projects/Instant%20verification.gif", 1872, 2156)],
   },
   {
-    title: "16 Steps of Verification to 8 Steps",
+    title: "8 Steps of Verification",
     body: "Collapsed redundant verification steps by combining trial-deposit confirmation with additional identity verification into a single pass.",
     images: [img("/projects/et-collapsed-steps.png", 624, 774)],
   },
@@ -55,30 +62,29 @@ const SOLUTIONS: Block[] = [
   },
 ];
 
+/** Figma 34:50041 — three columns, each an illustration above its own copy. */
 const PROBLEMS = [
   {
     title: "Multi-day verification wait times",
     body: "Trial deposits required 1–2 business days before a user could even confirm their external account, killing momentum at the exact moment intent was highest.",
+    image: img("/projects/et-problem-wait.png", 350, 252),
   },
   {
     title: "Redundant steps within enrollment",
     body: "Enrollment forced users through separate deposit-verification and identity-verification steps that could be collapsed without compromising security.",
+    image: img("/projects/et-problem-redundant.png", 350, 252),
   },
   {
     title: "Inconsistent interaction pattern",
     body: "Inconsistent interaction patterns across the external transfer experience reduced predictability, ultimately undermining the systemic trust that is absolutely critical to a high-fidelity financial transaction flow.",
+    image: img("/projects/et-problem-pattern.png", 350, 252),
   },
-];
-
-const HEADLINE_STATS = [
-  { value: "544K", label: "Total users" },
-  { value: "108K", label: "New Converted users" },
 ];
 
 const OUTCOMES = [
   "+25% improvement in enrollment completion",
   "108K enrollments processed post-launch",
-  "-49 seconds average reduction in sign-up flow time",
+  "−49 seconds average reduction in sign-up flow time",
   "544K external transfer users on the redesigned flow",
   "100K+ users moved through instant verification",
 ];
@@ -88,10 +94,17 @@ const PROCESS: Block[] = [
     title:
       "Listening to user desire to upgrade from trial deposits to real-time verification",
     body: "While trial deposits were historically favored as a secure ownership proof, we leveraged customer advocacy insights to align partners around a modern paradigm: micro-deposits are now less secure than real-time one-time passcodes and add unnecessary friction without protecting the user.",
+    images: [img("/projects/et-verification-paradigm.png", 2304, 1120)],
+    layout: "stacked",
   },
   {
     title: "Cut enrollment process from 16 steps into 10 steps",
     body: "Redesigned and consolidated a legacy 16-step pre-enrollment and post-enrollment flow into a highly optimized 10-step experience, while mapping out a future-state architecture to reduce the entire funnel to 6 friction-free steps.",
+    images: [
+      img("/projects/et-steps-1.png", 2304, 1560),
+      img("/projects/et-steps-2.png", 2304, 1560),
+    ],
+    layout: "stacked",
   },
   {
     title:
@@ -99,22 +112,26 @@ const PROCESS: Block[] = [
     body: "The goal across all enhancements is consistency: when the same element behaves predictably, users can complete tasks without learning new patterns.",
   },
   {
-    // Figma repeats the previous block's heading here. The original copy in
-    // projects.ts grouped these three items as bullets under that one heading,
-    // so this block needed a title of its own — written to match its body.
+    // Figma repeats the previous block's heading here; this block needed a
+    // title of its own, written to match its body.
     title: "A single, predictable input order",
     body: "Led a generative card-sorting workshop to restructure the six core transaction fields, converging on a single, high-predictability input order that mirrors user mental models.",
-    images: [img("/projects/et-card-sorting.png", 624, 774)],
+    images: [img("/projects/et-card-sorting.png", 1248, 1548)],
   },
   {
     title: "Consistent entry points, clearer guidance",
     body: "Standardized transfer entry points for a consistent look, added a prominent visual tile for clarity, and included subtext for user guidance.",
-    images: [img("/projects/et-entry-points.png", 1152, 774)],
+    images: [
+      img("/projects/et-entry-points-1.png", 2304, 1548),
+      img("/projects/et-entry-points-2.png", 2304, 1560),
+    ],
+    layout: "stacked",
   },
   {
     title: "Clear hierarchy, distinct information levels",
     body: "Established a clear visual hierarchy across all pages, ensuring content, containers, and background colors create distinction between different levels of information.",
-    images: [img("/projects/et-hierarchy.png", 1152, 774)],
+    images: [img("/projects/et-hierarchy.png", 2304, 782)],
+    layout: "stacked",
   },
 ];
 
@@ -122,24 +139,31 @@ const OTHER: Block[] = [
   {
     title: "AI-assisted design system building",
     body: "I used AI to systematically stress-test our newly structured transaction fields — generating robust copy and data states for edge cases.",
-    images: [img("/projects/et-ai-fields.png", 752, 752)],
+    images: [img("/projects/et-ai-fields.png", 1504, 1504)],
   },
   {
     title: "QA testing",
-    body: "Partnered with engineering to sequence backend verification changes alongside the UI rebuild, ensuring the compressed flow didn't outpace fraud/compliance checks.",
-    images: [img("/projects/et-qa.png", 1305, 393)],
+    body: "Partnered with engineering to sequence backend verification changes alongside the UI rebuild, ensuring the compressed flow didn't outpace fraud and compliance checks.",
+    images: [img("/projects/et-qa.png", 2354, 530)],
+    layout: "stacked",
   },
 ];
 
-function Panels({ images, alt }: { images: Block["images"]; alt: string }) {
+function Panels({
+  images,
+  alt,
+  full = false,
+}: {
+  images?: PanelImage[];
+  alt: string;
+  full?: boolean;
+}) {
   if (!images?.length) return null;
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8">
       {images.map((im, i) => {
         // The image optimizer flattens an animated GIF to its first frame, so
-        // GIFs are served unoptimized. Panel renders arrive with the 48px
-        // radius baked in; screen recordings are square-cornered and get it
-        // applied here instead.
+        // GIFs are served unoptimized.
         const isGif = im.src.toLowerCase().endsWith(".gif");
         return (
           <Image
@@ -148,9 +172,13 @@ function Panels({ images, alt }: { images: Block["images"]; alt: string }) {
             alt={images.length > 1 ? `${alt} (${i + 1} of ${images.length})` : alt}
             width={im.w}
             height={im.h}
-            sizes="(max-width: 768px) 100vw, 624px"
+            sizes={
+              full
+                ? "(max-width: 1200px) 100vw, 1152px"
+                : "(max-width: 768px) 100vw, 624px"
+            }
             unoptimized={isGif}
-            className={`h-auto w-full${isGif ? " rounded-panel-lg" : ""}`}
+            className="h-auto w-full rounded-panel-lg"
           />
         );
       })}
@@ -166,21 +194,21 @@ function SectionHeading({ id, children }: { id: string; children: React.ReactNod
   );
 }
 
-function SplitBlock({ title, body, images }: Block) {
-  const hasImages = Boolean(images?.length);
+function SplitBlock({ title, body, images, layout = "split" }: Block) {
+  const isSplit = Boolean(images?.length) && layout === "split";
   return (
     <div
       className={
-        hasImages
+        isSplit
           ? "grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32"
-          : "py-6"
+          : "flex flex-col gap-6 py-6"
       }
     >
       <div className="flex flex-col gap-2 pt-3">
         <h3 className="text-lg font-medium leading-6 text-ink">{title}</h3>
         <p className="max-w-3xl leading-relaxed text-ink-muted">{body}</p>
       </div>
-      <Panels images={images} alt={title} />
+      <Panels images={images} alt={title} full={!isSplit} />
     </div>
   );
 }
@@ -226,9 +254,9 @@ export default function ExternalTransferCaseStudy() {
           app monthly. I am the lead designer for the external transfer feature, which
           helps users move money from their PNC accounts to other bank accounts. I
           overhauled the entire mobile external transfer experience to combat a 45%
-          enrollment abandonment rate that was costing the bank millions. Streamlined the
-          onboarding process and established structural consistency across all payment and
-          transfer flows.
+          enrollment abandonment rate that was costing the bank millions, streamlining the
+          onboarding process and establishing structural consistency across all payment
+          and transfer flows.
         </p>
 
         <nav aria-label="Case study sections" className="flex flex-wrap items-center gap-2 pb-4">
@@ -247,7 +275,7 @@ export default function ExternalTransferCaseStudy() {
       </header>
 
       {/* The Solution */}
-      <section className="mt-11 flex flex-col gap-6">
+      <section className="mt-32 flex flex-col gap-6">
         <SectionHeading id="solution">The Solution</SectionHeading>
         {SOLUTIONS.map((s) => (
           <SplitBlock key={s.title} {...s} />
@@ -255,16 +283,24 @@ export default function ExternalTransferCaseStudy() {
       </section>
 
       {/* The Problem */}
-      <section className="mt-11 flex flex-col gap-6">
+      <section className="mt-32 flex flex-col gap-6">
         <SectionHeading id="problem">The Problem</SectionHeading>
         <p className="max-w-3xl leading-relaxed text-ink-muted">
           External transfer enrollment was bleeding users before they ever initiated a
-          transaction, resulting in a 35% abandonment rate partway through the process
+          transaction, resulting in a 35% abandonment rate partway through the process,
           alongside inconsistent interaction patterns during the make-a-transfer process.
         </p>
-        <ul className="grid gap-4 md:grid-cols-3">
+        <ul className="grid gap-10 pt-4 md:grid-cols-3 md:gap-8">
           {PROBLEMS.map((p) => (
-            <li key={p.title} className="flex flex-col gap-2 rounded-panel bg-surface p-6">
+            <li key={p.title} className="flex flex-col gap-4">
+              <Image
+                src={p.image.src}
+                alt=""
+                width={p.image.w}
+                height={p.image.h}
+                sizes="(max-width: 768px) 100vw, 350px"
+                className="h-auto w-full rounded-panel"
+              />
               <h3 className="text-lg font-medium leading-6 text-ink">{p.title}</h3>
               <p className="leading-relaxed text-ink-muted">{p.body}</p>
             </li>
@@ -273,52 +309,30 @@ export default function ExternalTransferCaseStudy() {
       </section>
 
       {/* Outcomes & Impact */}
-      <section className="mt-11 flex flex-col gap-6">
+      <section className="mt-32 flex flex-col gap-6">
         <SectionHeading id="outcomes">Outcomes &amp; Impact</SectionHeading>
-        <p className="max-w-3xl leading-relaxed text-ink-muted">
-          Product already shipped to production; live in PNC&rsquo;s mobile app.
-        </p>
-
-        <div className="grid items-start gap-8 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32">
-          <div className="flex flex-col gap-4">
-            {HEADLINE_STATS.map((s) => (
-              <div
-                key={s.label}
-                className="flex flex-col gap-1 rounded-panel bg-surface p-8"
-              >
-                <span className="text-4xl font-normal tracking-tight text-ink-strong">
-                  {s.value}
-                </span>
-                <span className="text-label uppercase tracking-label text-ink-muted">
-                  {s.label}
-                </span>
-              </div>
-            ))}
+        <div className="grid items-start gap-8 py-6 md:grid-cols-[minmax(0,400px)_1fr] md:gap-32">
+          <div className="flex flex-col gap-6 pt-3">
+            <p className="leading-relaxed text-ink">
+              Product already shipped to production; live in PNC&rsquo;s mobile app.
+            </p>
+            <ul className="flex flex-col gap-3">
+              {OUTCOMES.map((o) => (
+                <li key={o} className="leading-relaxed text-ink-muted">
+                  {o}
+                </li>
+              ))}
+            </ul>
           </div>
-          <Image
-            src="/projects/et-outcomes.png"
+          <Panels
+            images={[img("/projects/et-outcomes.png", 1248, 1248)]}
             alt="External transfer outcomes"
-            width={624}
-            height={624}
-            sizes="(max-width: 768px) 100vw, 624px"
-            className="h-auto w-full"
           />
         </div>
-
-        <ul className="grid gap-4 sm:grid-cols-2">
-          {OUTCOMES.map((o) => (
-            <li
-              key={o}
-              className="rounded-panel bg-surface p-6 leading-relaxed text-ink-muted"
-            >
-              {o}
-            </li>
-          ))}
-        </ul>
       </section>
 
       {/* Deep Dive */}
-      <section className="mt-11 flex flex-col gap-6">
+      <section className="mt-32 flex flex-col gap-6">
         <SectionHeading id="process">
           Deep Dive: Process, Iterations, and Trade-offs
         </SectionHeading>
@@ -328,7 +342,7 @@ export default function ExternalTransferCaseStudy() {
       </section>
 
       {/* Other Contribution */}
-      <section className="mt-11 flex flex-col gap-6">
+      <section className="mt-32 flex flex-col gap-6">
         <SectionHeading id="other">Other Contribution</SectionHeading>
         {OTHER.map((o) => (
           <SplitBlock key={o.title} {...o} />
@@ -336,7 +350,7 @@ export default function ExternalTransferCaseStudy() {
       </section>
 
       {/* Lesson Learned */}
-      <section className="mt-11 flex flex-col gap-4 pb-12">
+      <section className="mt-32 flex flex-col gap-4 pb-12">
         <SectionHeading id="lessons">Lesson Learned</SectionHeading>
         <p className="max-w-3xl leading-relaxed text-ink-muted">
           What I&rsquo;ve learned is that leadership is the driving force behind innovation
