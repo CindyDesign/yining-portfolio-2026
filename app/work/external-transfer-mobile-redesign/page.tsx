@@ -142,8 +142,11 @@ const OTHER: Block[] = [
   },
   {
     title: "QA testing",
-    body: "Partnered with engineering to sequence backend verification changes alongside the UI rebuild, ensuring the compressed flow didn't outpace fraud and compliance checks.",
-    images: [img("/projects/et-qa.png", 2354, 530)],
+    body: "Partnered with engineering to sequence backend verification changes alongside the UI rebuild, ensuring the compressed flow didn't outpace fraud/compliance checks.",
+    // Figma 49:71761 dropped the grey Background wrapper — image 10 now runs
+    // full width on its own. Shipped at the asset's native 2334x525, which is
+    // already ~2x the 1152 placement, so no resampling at all.
+    images: [img("/projects/et-qa.png", 2334, 525)],
     layout: "stacked",
   },
 ];
