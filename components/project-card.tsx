@@ -35,9 +35,10 @@ export function ProjectCard({ project, priority }: ProjectCardProps) {
             {project.summary}
           </p>
 
+          {/* Figma 218:9920 — the pill became a 16px rounded rectangle. */}
           <span
-            className="mt-3 inline-flex items-center gap-2 self-start rounded-full
-                       border border-ink px-[22px] py-[13px] text-sm font-medium text-ink
+            className="mt-3 inline-flex items-center gap-2 self-start rounded-card
+                       border border-ink px-[22px] py-[13px] text-sm font-medium leading-5 text-ink
                        transition-colors duration-300 ease-soft group-hover:bg-ink/5"
           >
             View Project

@@ -1,91 +1,62 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
-const segments = [
-  { text: "Hi, I’m Cindy. A Senior Product Designer & AI Builder crafting ", accent: false },
-  { text: "intuitive", accent: true },
-  { text: ", ", accent: false },
-  { text: "visually striking", accent: true },
-  { text: " Fintech experiences.", accent: false },
-] as const;
-
-const fullText = segments.map((s) => s.text).join("");
-
+/**
+ * Landing hero, matching Figma 227:5644.
+ *
+ * The typewriter animation is gone, which also means this no longer needs to be
+ * a client component — it renders as static HTML with no JS and no layout
+ * reservation hack.
+ *
+ * Headline is Figma 10:512: 48px Regular, 58px line height, -0.9px tracking,
+ * #182230, with the two accent phrases in #bc532b.
+ */
 export function Hero() {
-  const [charCount, setCharCount] = useState(0);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setCharCount(fullText.length);
-      return;
-    }
-
-    let count = 0;
-    const interval = setInterval(() => {
-      count += 1;
-      setCharCount(count);
-      if (count >= fullText.length) clearInterval(interval);
-    }, 28);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const isDone = charCount >= fullText.length;
-
-  let consumed = 0;
-  const rendered = segments.map((segment, i) => {
-    const start = consumed;
-    consumed += segment.text.length;
-    const visible = segment.text.slice(0, Math.max(0, charCount - start));
-    if (!visible) return null;
-    return segment.accent ? (
-      <span key={i} className="text-accent">
-        {visible}
-      </span>
-    ) : (
-      <span key={i}>{visible}</span>
-    );
-  });
-
   return (
     <section className="mx-auto max-w-shell px-6 pb-24 pt-16 sm:pt-24">
-      <h1 className="relative max-w-4xl text-4xl font-light leading-[1.15] tracking-tight text-ink sm:text-6xl lg:text-[66px] lg:leading-[1.08] lg:tracking-[-1.32px]">
-        {/* Reserves the final text's height so typing doesn't shift the layout */}
-        <span className="invisible" aria-hidden="true">
-          {fullText}
-        </span>
-
-        <span className="absolute inset-0" aria-hidden="true">
-          {rendered}
-          <span
-            className={`ml-1 inline-block h-[0.85em] w-[2px] translate-y-[0.1em] bg-ink align-middle ${
-              isDone ? "animate-[blink_1s_steps(1)_infinite]" : ""
-            }`}
-          />
-        </span>
-
-        <span className="sr-only">{fullText}</span>
+      <h1 className="max-w-4xl text-3xl font-normal leading-tight tracking-[-0.9px] text-ink-stat sm:text-4xl lg:text-5xl lg:leading-[58px]">
+        Hi, I&rsquo;m Cindy. I&rsquo;m a Senior Product Designer &amp; AI native builder
+        who turns complex Fintech challenges into{" "}
+        <span className="text-accent">intuitive</span>,{" "}
+        <span className="text-accent">visually pleasing</span> experiences
       </h1>
 
-      <Link
-        href="#work"
-        aria-label="Scroll to featured work"
-        className="mt-12 inline-flex h-11 w-11 items-center justify-center rounded-full
-                   text-ink/60 transition-all duration-300 ease-soft
-                   hover:translate-y-1 hover:text-ink"
-      >
-        <svg width="20" height="24" viewBox="0 0 20 24" fill="none" aria-hidden>
-          <path
-            d="M10 1v22M10 23l-8-8M10 23l8-8"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </Link>
+      {/* Figma 227:5662 — solid primary scrolls to the work list, ghost secondary
+          goes to the About page. */}
+      <div className="mt-10 flex flex-wrap items-center gap-4">
+        <a
+          href="#work"
+          className="inline-flex items-center rounded-card bg-ink-strong px-[30px] py-3 text-sm
+                     font-medium leading-5 text-[#fcfcfd] transition-opacity duration-300
+                     ease-soft hover:opacity-90"
+        >
+          See selected work
+        </a>
+
+        <Link
+          href="/about"
+          className="group inline-flex items-center gap-3 rounded-card px-[22px] py-3 text-sm
+                     font-medium leading-5 text-ink transition-colors duration-300 ease-soft
+                     hover:text-accent"
+        >
+          About Cindy
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden
+            className="transition-transform duration-300 ease-soft group-hover:translate-x-1"
+          >
+            <path
+              d="M2 8h11M9 4l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </Link>
+      </div>
     </section>
   );
 }

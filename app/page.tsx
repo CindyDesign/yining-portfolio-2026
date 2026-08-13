@@ -7,10 +7,9 @@ export default function HomePage() {
     <>
       <Hero />
 
-      <section id="work" className="mx-auto max-w-shell px-6 pb-24">
-        <p className="mb-8 text-label font-medium uppercase tracking-label text-ink-muted">
-          Selected Work
-        </p>
+      {/* Figma dropped the "Selected Work" eyebrow; the hero button now labels
+          this section instead. scroll-mt keeps the anchor clear of the header. */}
+      <section id="work" className="mx-auto max-w-shell scroll-mt-8 px-6 pb-24">
         <div className="flex flex-col">
           {projects.map((project, i) => (
             <ProjectCard
