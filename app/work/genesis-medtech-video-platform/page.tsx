@@ -50,13 +50,13 @@ const SOLUTIONS: Block[] = [
     title: "Uploading Process",
     // Figma's copy ends on a comma mid-sentence; closed it.
     body: "A guided upload with AI-prefilled surgery descriptions and automated flagging of patient-identifiable frames.",
-    images: [img("/projects/gen-upload-process.png", 2304, 1440)],
+    images: [img("/projects/gen-upload-process.gif", 3456, 2080)],
     layout: "stacked",
   },
   {
     title: "AI-assisted editor",
     body: "AI-assisted editor that surfaces unusable and sensitive clips for surgeon review before publishing.",
-    images: [img("/projects/gen-ai-editor.png", 2304, 1440)],
+    images: [img("/projects/gen-ai-editor.gif", 3456, 2080)],
     layout: "stacked",
   },
 ];
@@ -179,21 +179,27 @@ function Panels({
   if (!images?.length) return null;
   return (
     <div className="flex flex-col gap-8">
-      {images.map((im, i) => (
-        <Image
-          key={im.src}
-          src={im.src}
-          alt={images.length > 1 ? `${alt} (${i + 1} of ${images.length})` : alt}
-          width={im.w}
-          height={im.h}
-          sizes={
-            full
-              ? "(max-width: 1200px) 100vw, 1152px"
-              : "(max-width: 768px) 100vw, 624px"
-          }
-          className="h-auto w-full rounded-panel-lg"
-        />
-      ))}
+      {images.map((im, i) => {
+        // The image optimizer flattens an animated GIF to its first frame, so
+        // GIFs must be served unoptimized to stay animated.
+        const isGif = im.src.toLowerCase().endsWith(".gif");
+        return (
+          <Image
+            key={im.src}
+            src={im.src}
+            alt={images.length > 1 ? `${alt} (${i + 1} of ${images.length})` : alt}
+            width={im.w}
+            height={im.h}
+            sizes={
+              full
+                ? "(max-width: 1200px) 100vw, 1152px"
+                : "(max-width: 768px) 100vw, 624px"
+            }
+            unoptimized={isGif}
+            className="h-auto w-full rounded-panel-lg"
+          />
+        );
+      })}
     </div>
   );
 }
