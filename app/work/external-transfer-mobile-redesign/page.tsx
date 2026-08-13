@@ -135,7 +135,10 @@ const OTHER: Block[] = [
   {
     title: "AI-assisted design system building",
     body: "I used AI to systematically stress-test our newly structured transaction fields — generating robust copy and data states for edge cases.",
-    images: [img("/projects/et-ai-fields.png", 1504, 1504)],
+    // Figma 232:34869 places image 148 at 624x624 with no Background wrapper,
+    // so it ships as-is at 2x. An earlier pass composited a 64px #f2f4f7 field
+    // around it; that was a deviation from the design and has been removed.
+    images: [img("/projects/et-ai-fields.png", 1248, 1248)],
   },
   {
     title: "QA testing",
