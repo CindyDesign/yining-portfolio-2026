@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { HeroShader } from "@/components/hero-shader";
 
 /**
  * Landing hero, matching Figma 227:5644.
@@ -20,11 +19,10 @@ export function Hero() {
      * fallback for engines without svh.
      */
     <section
-      className="relative isolate mx-auto flex max-w-shell flex-col justify-center px-6 py-12
+      className="mx-auto flex max-w-shell flex-col justify-center px-6 py-12
                  min-h-[calc(100vh-var(--header-h))]
                  [@supports(height:100svh)]:min-h-[calc(100svh-var(--header-h))]"
     >
-      <HeroShader />
       <h1 className="max-w-4xl text-3xl font-normal leading-tight tracking-[-0.9px] text-ink-stat sm:text-4xl lg:text-5xl lg:leading-[58px]">
         Hi, I&rsquo;m Cindy. I&rsquo;m a Senior Product Designer &amp; AI native builder
         who turns complex Fintech challenges into{" "}
