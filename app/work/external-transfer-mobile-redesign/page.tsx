@@ -51,33 +51,29 @@ const SOLUTIONS: Block[] = [
     images: [img("/projects/Instant%20verification.gif", 1872, 2156)],
   },
   {
-    title: "8 Steps of Verification",
-    body: "Collapsed redundant verification steps by combining trial-deposit confirmation with additional identity verification into a single pass.",
-    images: [img("/projects/et-collapsed-steps.png", 624, 774)],
-  },
-  {
     title: "Consistent Transfer Interaction Pattern",
     body: "Established one consistent transfer flow from entry point to success screen so the experience felt identical whether a user started from account overview, transfers, or settings.",
     images: [img("/projects/Consistent_Transfer.gif", 1872, 2156)],
   },
 ];
 
-/** Figma 34:50041 — three columns, each an illustration above its own copy. */
+/**
+ * Figma 34:50041 renders these as three columns with an illustration above each.
+ * The illustrations are dropped here by request; the three boxes stretch to a
+ * shared height so the differing body lengths don't stagger them.
+ */
 const PROBLEMS = [
   {
     title: "Multi-day verification wait times",
     body: "Trial deposits required 1–2 business days before a user could even confirm their external account, killing momentum at the exact moment intent was highest.",
-    image: img("/projects/et-problem-wait.png", 350, 252),
   },
   {
     title: "Redundant steps within enrollment",
     body: "Enrollment forced users through separate deposit-verification and identity-verification steps that could be collapsed without compromising security.",
-    image: img("/projects/et-problem-redundant.png", 350, 252),
   },
   {
     title: "Inconsistent interaction pattern",
     body: "Inconsistent interaction patterns across the external transfer experience reduced predictability, ultimately undermining the systemic trust that is absolutely critical to a high-fidelity financial transaction flow.",
-    image: img("/projects/et-problem-pattern.png", 350, 252),
   },
 ];
 
@@ -290,17 +286,13 @@ export default function ExternalTransferCaseStudy() {
           transaction, resulting in a 35% abandonment rate partway through the process,
           alongside inconsistent interaction patterns during the make-a-transfer process.
         </p>
-        <ul className="grid gap-10 pt-4 md:grid-cols-3 md:gap-8">
+        {/* items-stretch + h-full keeps all three boxes the same height */}
+        <ul className="grid items-stretch gap-4 pt-4 md:grid-cols-3">
           {PROBLEMS.map((p) => (
-            <li key={p.title} className="flex flex-col gap-4">
-              <Image
-                src={p.image.src}
-                alt=""
-                width={p.image.w}
-                height={p.image.h}
-                sizes="(max-width: 768px) 100vw, 350px"
-                className="h-auto w-full rounded-panel"
-              />
+            <li
+              key={p.title}
+              className="flex h-full flex-col gap-2 rounded-card border border-line bg-bg p-6"
+            >
               <h3 className="text-lg font-medium leading-6 text-ink">{p.title}</h3>
               <p className="leading-relaxed text-ink-muted">{p.body}</p>
             </li>
