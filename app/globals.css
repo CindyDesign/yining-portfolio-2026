@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /*
+   * Height of the site header, used by the hero to fill exactly one viewport.
+   * site-nav is py-8 (32 + 32) around a 28px line-height row.
+   * Keep in sync if that padding changes.
+   */
+  --header-h: 92px;
+}
+
 html {
   scroll-behavior: smooth;
 }
